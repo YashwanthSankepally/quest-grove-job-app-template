@@ -1,0 +1,17 @@
+<app-header></app-header>
+
+<section class="qg-courses-section">
+    <div class="qg-courses-container">
+        <div class="card qg-card" style="width: 18rem;" *ngFor="let course of coursesArray" [tabIndex]="0">
+            <img src="{{course.thumbnail}}" class="card-img-top" alt="course logo">
+            <div class="card-body qg-card-body">
+              <h1 class="card-title text-truncate"> {{course.courseTitle}} </h1>
+              <p class="card-text text-truncate" title="{{course.info}}"> {{course.info}} </p>
+              <a href="{{course.playlistUrl}}" target="_blank" class="btn qg-yt-btn">
+                <i class="fa-brands fa-youtube"></i>
+                Watch in YouTube
+              </a>
+            </div>
+          </div>
+    </div>
+</section>

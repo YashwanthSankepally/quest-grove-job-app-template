@@ -1,0 +1,9 @@
+@import '../../assets/scss/mixins.scss';
+@import '../../assets/scss/variables.scss';
+
+.qg-home-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

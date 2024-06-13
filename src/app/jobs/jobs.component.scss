@@ -1,0 +1,90 @@
+@import '../../assets/scss/mixins.scss';
+@import '../../assets/scss/variables.scss';
+
+.qg-jobs-section {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+
+    .qg-cards-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        height: 100%;
+        width: 74%;
+        border: 1px solid $border-color;
+        overflow-y: scroll;
+        margin-bottom: 10px;
+        border-radius: 8px;
+
+        .qg-card {
+            margin: 10px;
+
+            .qg-card-body {
+                .qg-btn-container {
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+
+                    button:focus-visible {
+                        border: 2px solid #000000 !important;
+                        box-shadow: none !important;
+                    }
+
+                    // .qg-view-more-btn {
+                    //     @include infoBtn;
+                    // }
+                }
+            }
+
+            .qg-arrow-hover-icon {
+                display: none;
+            }
+
+            &:hover .qg-arrow-hover-icon,
+            &:focus-within .qg-arrow-hover-icon {
+                display: flex;
+                margin-left: auto;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+}
+
+.qg-modal-section {
+    .qg-modal-popup-container {
+        .qg-modal-popup-dialog {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            max-width: 80% !important;
+            margin: auto; /* Center horizontally and vertically */
+
+            .qg-modal-content {
+                .qg-modal-body {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    overflow: auto;
+                    padding: 10px 6rem;
+
+                    .qg-modal-job-container {
+                        display: flex;
+                        flex-direction: column;
+                        flex-wrap: wrap;
+                        // align-items: center; /* Center content horizontally */
+                        // text-align: center;  /* Center text */
+
+                        p {
+                            margin: 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

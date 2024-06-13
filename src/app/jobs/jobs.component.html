@@ -1,0 +1,73 @@
+<app-header></app-header>
+<section class="qg-jobs-section">
+	<div class="qg-cards-container">
+		<div class="card qg-card" style="width: 18rem;" *ngFor="let job of jobsArray; let i = index" [tabIndex]="0"
+		aria-label="job card">
+			<div class="card-body qg-card-body">
+				<h2 class="card-title">{{job.role}}</h2>
+				<h3 class="card-subtitle mb-2 text-body-secondary">{{job.companyName}}</h3>
+				<p class="card-text text-truncate">{{job.aboutJobRole}}</p>
+				<div class="qg-btn-container">
+					<button class="card-link btn btn-primary" (click)="apply(job)">
+						{{ job.isApplied ? 'Applied' : 'Apply' }}
+					</button>
+					<button type="button" class="btn btn-info card-link" data-bs-toggle="modal"
+						[attr.data-bs-target]="'#staticBackdrop' + i">View More</button>
+					<button type="button" class="border-0 bg-transparent qg-arrow-hover-icon" (click)="more(job)"
+						aria-label="View in page" title="View in page">
+						<i class="fa-solid fa-angles-right"></i>
+					</button>
+
+					<!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+					class="qg-arrow-hover-icon">
+						<mat-icon>more_vert</mat-icon>
+					</button> -->
+					<mat-menu #menu="matMenu">
+						<button mat-menu-item (click)="more(job)">
+						  View in page
+						</button>
+					</mat-menu>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="qg-modal-section">
+	<div class="qg-modal-popup-container" *ngFor="let job of jobsArray; let i = index">
+		<!-- Modal -->
+		<div class="modal" [attr.id]="'staticBackdrop' + i" data-bs-backdrop="static" data-bs-keyboard="true"
+			tabindex="-1" [attr.aria-labelledby]="'staticBackdropLabel' + i" aria-hidden="true">
+			<div class="modal-dialog qg-modal-popup-dialog">
+				<div class="modal-content qg-modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" [attr.id]="'staticBackdropLabel' + i">{{job.companyName}}</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body qg-modal-body">
+						<div class="qg-modal-job-container">
+							<p><i class="fa-solid fa-id-badge me-1"></i> {{job.role}}</p>
+							<p><i class="fa-solid fa-screwdriver-wrench me-1"></i> {{job.skills}}</p>
+							<p><i class="fa-solid fa-indian-rupee-sign me-1"></i> {{job.Salary}}</p>
+							<p><i class="fa-solid fa-business-time me-1"></i> {{job.Experience}}</p>
+							<p><i class="fa-solid fa-briefcase me-1"></i> {{job.aboutJobRole}}</p>
+							<p><i class="fa-solid fa-building me-1"></i> {{job.aboutCompany}}</p>
+							<p><i class="fa-solid fa-map-marker-alt me-1"></i> {{job.Address}}</p>
+							<p><i class="fa-solid fa-city me-1"></i> {{job.City}}</p>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<!-- <button type="button" class="btn btn-info" (click)="more(job)">
+							View More
+						</button> -->
+						<button type="button" class="btn btn-primary" (click)="apply(job)">
+							{{ job.isApplied ? 'Applied' : 'Apply' }}
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

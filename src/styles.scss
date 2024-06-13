@@ -1,1 +1,81 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles */
+html, body {
+    height: 100%;
+  }
+  
+  body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+  }
+  
+  // /* Custom scrollbar for body */
+  // body::-webkit-scrollbar {
+  //   width: 8px; /* width of the entire scrollbar */
+  // }
+  
+  // body::-webkit-scrollbar-track {
+  //   background: initial; /* default color of the tracking area */
+  // }
+  
+  // body::-webkit-scrollbar-thumb {
+  //   background-color: initial; /* default color of the scroll thumb */
+  //   border-radius: 10px; /* roundness of the scroll thumb */
+  //   border: 2px solid transparent; /* creates padding around scroll thumb */
+  // }
+  
+  // /* Custom scrollbar for div containers */
+  // div::-webkit-scrollbar {
+  //   width: 8px; /* width of the entire scrollbar */
+  // }
+  
+  // div::-webkit-scrollbar-track {
+  //   background: initial; /* default color of the tracking area */
+  // }
+  
+  // div::-webkit-scrollbar-thumb {
+  //   background-color: initial; /* default color of the scroll thumb */
+  //   border-radius: 10px; /* roundness of the scroll thumb */
+  //   border: 2px solid transparent; /* creates padding around scroll thumb */
+  // }
+  
+  /* Firefox scrollbar styles */
+  body, div {
+    scrollbar-width: thin;
+    scrollbar-color: initial initial;
+  }
+  
+  /* Custom scrollbar for other browsers (fallback) */
+  body, div {
+    &::-moz-scrollbar {
+      width: 8px;
+    }
+  
+    &::-moz-scrollbar-track {
+      background: initial;
+    }
+  
+    &::-moz-scrollbar-thumb {
+      background-color: initial;
+      border-radius: 10px;
+      border: 2px solid transparent;
+    }
+  }
+  
+  /* Webkit (Chrome, Safari, etc.) scrollbar */
+/* Track */
+::-webkit-scrollbar {
+  width: 6px; /* Width of the scrollbar */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color of the scrollbar handle */
+  border-radius: 5px; /* Border radius of the handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color of the handle when hovered */
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

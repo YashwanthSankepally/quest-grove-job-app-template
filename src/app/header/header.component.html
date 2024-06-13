@@ -1,0 +1,136 @@
+<section class="qga-header-section">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid">
+            <button class="navbar-brand qga-logo-container" (click)="home()">
+                <img src="../../assets/images/QuestGroveNavLogo.png" alt="Quest Grove logo image" class="qga-nav-logo">
+                <h1>Quest Grove</h1>
+            </button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <form class="d-flex mx-auto" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-success" type="submit" onclick="alert('Work in Progress')"
+                    aria-label="Search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 qga-items-list">
+                    <li class="nav-item qga-list-item">
+                        <button class="nav-link qg-list-btn" (click)="jobs()">
+                            <i class="bi bi-briefcase-fill"></i>
+                            Jobs
+                        </button>
+                    </li>
+                    <li class="nav-item qga-list-item">
+                        <button class="nav-link qg-list-btn" (click)="courses()">
+                            <i class="fa-solid fa-book-open"></i>
+                            Courses
+                        </button>
+                    </li>
+                    <!-- <li class="nav-item qga-list-item">
+                        <button class="nav-link qg-list-btn" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                            <i class="bi bi-question-diamond-fill"></i>
+                            Whats New
+                        </button>
+                    </li> -->
+                    <li class="nav-item qga-list-item">
+                        <button class="nav-link qg-list-btn" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight2">
+                            <i class="bi bi-person-circle"></i>
+                            Profile
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</section>
+
+<section class="qga-offcanvas-section">
+
+    <!-- <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h1 class="offcanvas-title" id="offcanvasRightLabel">
+                <i class="bi bi-question-diamond-fill"></i>
+                Whats New
+            </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <h2>Features</h2>
+                        <ol>
+                            <li>Jobs</li>
+                            <li>Courses</li>
+                        </ol>
+                    </div>
+                </li>
+                <li class="list-group-item">A second item</li>
+                <li class="list-group-item">A third item</li>
+                <li class="list-group-item">A fourth item</li>
+                <li class="list-group-item">And a fifth one</li>
+              </ul>
+        </div>
+    </div> -->
+
+    <div class="offcanvas offcanvas-end qg-sidebar" data-bs-backdrop="static" tabindex="-1" id="offcanvasRight2"
+        aria-labelledby="offcanvasRightLabel2" style="width: 250px;">
+        <div class="offcanvas-header qg-sidebar-header">
+            <h1 class="offcanvas-title qg-offcanvas-title" id="offcanvasRightLabel2">Profile</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body qg-offcanvas-body">
+            
+            <div class="qg-profile-container">
+                <div class="d-flex justify-content-center align-items-center qg-img-div">
+                    <img src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" alt="Profile image"
+                    class="qg-profile-image">
+                </div>
+                <div class="qg-profile-details-container d-flex flex-column justify-content-center align-items-center">
+                    <p><strong>UserName</strong></p>
+                    <button type="button" class="btn btn-primary"
+                    (click)="editProfile()">
+                        <i class="bi bi-person-circle"></i> Edit profile
+                    </button>
+                </div>
+            </div>
+
+            <div class="list-group">
+                <!-- <button type="button" class="list-group-item list-group-item-action"
+                (click)="editProfile()">
+                    <i class="bi bi-person-circle"></i> Edit profile
+                </button> -->
+                <button type="button" class="list-group-item list-group-item-action qg-list-btn"
+                (click)="appliedJobs()">
+                    <i class="fa-solid fa-briefcase"></i>
+                    Applied jobs
+                </button>
+                <button type="button" class="list-group-item list-group-item-action qg-list-btn">
+                    <i class="fa-solid fa-palette"></i> Change Theme
+                </button>
+                <button type="button" class="list-group-item list-group-item-action qg-list-btn" (click)="settings()">
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
+                </button>
+                <button type="button" class="list-group-item list-group-item-action qg-list-btn" (click)="feedback()">
+                    <i class="fa-solid fa-comment-dots"></i>
+                    Feedback
+                </button>
+                <a href="../../assets/whatsnew.html" target="_blank" type="button"
+                class="list-group-item list-group-item-action qg-list-btn">
+                    <i class="bi bi-question-diamond-fill"></i>
+                    Whats New
+                </a>
+                <!-- <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button> -->
+            </div>
+        </div>
+    </div>
+</section>
