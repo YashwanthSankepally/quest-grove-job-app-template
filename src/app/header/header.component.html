@@ -1,20 +1,20 @@
-<section class="qga-header-section">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
-        <div class="container-fluid">
+<section class="qg-app-section">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top qg-nav">
+        <div class="container-fluid qg-nav-bar-container-fluid">
             <button class="navbar-brand qga-logo-container" (click)="home()">
-                <img src="../../assets/images/QuestGroveNavLogo.png" alt="Quest Grove logo image" class="qga-nav-logo">
-                <h1>Quest Grove</h1>
+                <img src="../../assets/images/QGNavLogo.png" alt="Quest Grove logo image" class="qga-nav-logo">
+                <h1 class="qg-h1">Quest Grove</h1>
             </button>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse bg-body-tertiary qg-supportedContent" id="navbarSupportedContent">
                 <form class="d-flex mx-auto" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-success" type="submit" onclick="alert('Work in Progress')"
-                    aria-label="Search">
+                        aria-label="Search">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </form>
@@ -31,16 +31,9 @@
                             Courses
                         </button>
                     </li>
-                    <!-- <li class="nav-item qga-list-item">
-                        <button class="nav-link qg-list-btn" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                            <i class="bi bi-question-diamond-fill"></i>
-                            Whats New
-                        </button>
-                    </li> -->
                     <li class="nav-item qga-list-item">
                         <button class="nav-link qg-list-btn" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight2">
+                            data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                             <i class="bi bi-person-circle"></i>
                             Profile
                         </button>
@@ -53,82 +46,128 @@
 
 <section class="qga-offcanvas-section">
 
-    <!-- <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="offcanvasRight"
-        aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-            <h1 class="offcanvas-title" id="offcanvasRightLabel">
-                <i class="bi bi-question-diamond-fill"></i>
-                Whats New
-            </h1>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <div class="d-flex flex-column justify-content-center align-items-center">
-                        <h2>Features</h2>
-                        <ol>
-                            <li>Jobs</li>
-                            <li>Courses</li>
-                        </ol>
-                    </div>
-                </li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-                <li class="list-group-item">A fourth item</li>
-                <li class="list-group-item">And a fifth one</li>
-              </ul>
-        </div>
-    </div> -->
-
-    <div class="offcanvas offcanvas-end qg-sidebar" data-bs-backdrop="static" tabindex="-1" id="offcanvasRight2"
-        aria-labelledby="offcanvasRightLabel2" style="width: 250px;">
+    <div class="offcanvas offcanvas-end qg-sidebar" data-bs-backdrop="static" tabindex="-1" id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel" style="width: 250px;">
         <div class="offcanvas-header qg-sidebar-header">
-            <h1 class="offcanvas-title qg-offcanvas-title" id="offcanvasRightLabel2">Profile</h1>
+            <h1 class="offcanvas-title qg-offcanvas-title mt-3" id="offcanvasRightLabel">Profile</h1>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body qg-offcanvas-body">
-            
-            <div class="qg-profile-container">
-                <div class="d-flex justify-content-center align-items-center qg-img-div">
-                    <img src="https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg" alt="Profile image"
-                    class="qg-profile-image">
+
+            <div class="qg-profile-container" [tabIndex]="0">
+                <div class="d-flex justify-content-center align-items-center qg-img-div mb-1">
+                    <img [src]="defaultImgUrl" alt="Profile image" class="qg-profile-image">
                 </div>
-                <div class="qg-profile-details-container d-flex flex-column justify-content-center align-items-center">
-                    <p><strong>UserName</strong></p>
-                    <button type="button" class="btn btn-primary"
-                    (click)="editProfile()">
+                <div
+                    class="qg-profile-details-container d-flex flex-column justify-content-center align-items-center mt-1">
+                    <p class="fw-semibold">
+                        {{userName}}
+                    </p>
+                    <button type="button" class="qg-edit-profile-btn" (click)="editProfile()">
                         <i class="bi bi-person-circle"></i> Edit profile
                     </button>
                 </div>
             </div>
 
-            <div class="list-group">
-                <!-- <button type="button" class="list-group-item list-group-item-action"
-                (click)="editProfile()">
-                    <i class="bi bi-person-circle"></i> Edit profile
-                </button> -->
+            <hr>
+
+            <div class="list-group mt-2 qg-list-group">
+
                 <button type="button" class="list-group-item list-group-item-action qg-list-btn"
-                (click)="appliedJobs()">
-                    <i class="fa-solid fa-briefcase"></i>
+                    (click)="toggleDarkMode()">
+                    <i class="fa-solid fa-palette me-1"></i> {{ darkModeText }}
+                </button>
+
+                <button type="button" class="list-group-item list-group-item-action qg-list-btn" (click)="blog()">
+                    <i class="fa-solid fa-blog"></i>
+                    Blog
+                </button>
+
+                <!-- <button type="button" class="list-group-item list-group-item-action qg-list-btn"> -->
+                    
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24">
+                        <path fill="currentColor"
+                            d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12c5.16-1.26 9-6.45 9-12V5Zm0 3.9a3 3 0 1 1-3 3a3 3 0 0 1 3-3m0 7.9c2 0 6 1.09 6 3.08a7.2 7.2 0 0 1-12 0c0-1.99 4-3.08 6-3.08" />
+                    </svg> -->
+                    <!-- <i class="fa-brands fa-black-tie"></i> -->
+                    <!-- Admin -->
+                     
+                <!-- </button> -->
+
+                <button type="button d-flex flex-row justify-content-center"
+                    class="list-group-item list-group-item-action qg-list-btn" (click)="appliedJobs()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" class="me-1">
+                        <path fill="currentColor"
+                            d="M10 2h4a2 2 0 0 1 2 2v2h4a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4V4a2 2 0 0 1 2-2m4 4V4h-4v2zm-3.5 11.5l6.59-6.59l-1.41-1.41l-5.18 5.17l-2.09-2.08L7 14z" />
+                    </svg>
                     Applied jobs
                 </button>
-                <button type="button" class="list-group-item list-group-item-action qg-list-btn">
-                    <i class="fa-solid fa-palette"></i> Change Theme
+
+                <button type="button" class="list-group-item list-group-item-action qg-list-btn" (click)="QgEduplay()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 20 20">
+                        <path fill="currentColor"
+                            d="M6 2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4.257a5.5 5.5 0 0 1-.657-1H6a1 1 0 0 1-1-1h4.207A5.5 5.5 0 0 1 16 9.207V4a2 2 0 0 0-2-2zm.75 2.5h6.5a.75.75 0 0 1 0 1.5h-6.5a.75.75 0 0 1 0-1.5M19 14.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0m-4.98-1.966a.45.45 0 0 0-.447-.037a.5.5 0 0 0-.155.108a.5.5 0 0 0-.145.357v3.075a.5.5 0 0 0 .145.358a.6.6 0 0 0 .157.11a.45.45 0 0 0 .323.02a.5.5 0 0 0 .13-.064l2.296-1.567a.47.47 0 0 0 .163-.185a.54.54 0 0 0-.003-.487a.5.5 0 0 0-.167-.182z" />
+                    </svg>
+                    QG EduPlay
                 </button>
+
+                <button type="button" class="list-group-item list-group-item-action qg-list-btn" (click)="resume()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 26 26" class="me-1">
+                        <g fill="none">
+                            <defs>
+                                <mask id="pepiconsPopCvCircleFilled0">
+                                    <path fill="#fff" d="M0 0h26v26H0z" />
+                                    <g fill="#000">
+                                        <path
+                                            d="M10.8 9.35c.56 0 1.01-.45 1.01-1.01s-.45-1.01-1.01-1.01s-1.01.45-1.01 1.01s.45 1.01 1.01 1.01" />
+                                        <path fill-rule="evenodd"
+                                            d="M12.83 11.55c0-1.08-.91-1.86-2.03-1.86c-1.12 0-2.03.78-2.03 1.86v.51c0 .09.04.18.1.24c.06.06.15.1.24.1h3.38c.09 0 .18-.04.24-.1c.06-.06.1-.15.1-.24zM8.75 14.5a.75.75 0 0 1 .75-.75h7a.75.75 0 0 1 0 1.5h-7a.75.75 0 0 1-.75-.75m0 3a.75.75 0 0 1 .75-.75h7a.75.75 0 0 1 0 1.5h-7a.75.75 0 0 1-.75-.75"
+                                            clip-rule="evenodd" />
+                                        <path fill-rule="evenodd"
+                                            d="M5.5 5.5c0-1.102.898-2 2-2h6.69c.562 0 1.092.238 1.465.631l.006.007l4.312 4.702c.359.383.527.884.527 1.36v10.3c0 1.102-.898 2-2 2h-11c-1.102 0-2-.898-2-2zm8.689 0H7.5v15h11V10.192l-4.296-4.685l-.003-.001a.041.041 0 0 0-.012-.006"
+                                            clip-rule="evenodd" />
+                                        <path fill-rule="evenodd"
+                                            d="M14.19 3.5a1 1 0 0 1 1 1v4.7h4.31a1 1 0 1 1 0 2h-5.31a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1"
+                                            clip-rule="evenodd" />
+                                    </g>
+                                </mask>
+                            </defs>
+                            <circle cx="13" cy="13" r="13" fill="currentColor"
+                                mask="url(#pepiconsPopCvCircleFilled0)" />
+                        </g>
+                    </svg>
+                    Resume
+                </button>
+
                 <button type="button" class="list-group-item list-group-item-action qg-list-btn" (click)="settings()">
-                    <i class="fa-solid fa-gear"></i>
+                    <i class="fa-solid fa-gear me-1"></i>
                     Settings
                 </button>
+
                 <button type="button" class="list-group-item list-group-item-action qg-list-btn" (click)="feedback()">
-                    <i class="fa-solid fa-comment-dots"></i>
+                    <i class="fa-solid fa-comment-dots me-1"></i>
                     Feedback
                 </button>
+
+                <button type="button" class="list-group-item list-group-item-action qg-list-btn text-truncate"
+                    (click)="faqs()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" class="me-1">
+                        <path fill="currentColor"
+                            d="M18 15H6l-4 4V3a1 1 0 0 1 1-1h15a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1m5-6v14l-4-4H8a1 1 0 0 1-1-1v-1h14V8h1a1 1 0 0 1 1 1M8.19 4c-.87 0-1.57.2-2.11.59c-.52.41-.78.98-.77 1.77l.01.03h1.93c.01-.3.1-.53.28-.69a1 1 0 0 1 .66-.23c.31 0 .57.1.75.28c.18.19.26.45.26.75c0 .32-.07.59-.23.82c-.14.23-.35.43-.61.59c-.51.34-.86.64-1.05.91C7.11 9.08 7 9.5 7 10h2c0-.31.04-.56.13-.74s.26-.36.51-.52c.45-.24.82-.53 1.11-.93s.44-.81.44-1.31c0-.76-.27-1.37-.81-1.82C9.85 4.23 9.12 4 8.19 4M7 11v2h2v-2zm6 2h2v-2h-2zm0-9v6h2V4z" />
+                    </svg>
+                    <span>FAQS</span>
+                </button>
+
                 <a href="../../assets/whatsnew.html" target="_blank" type="button"
-                class="list-group-item list-group-item-action qg-list-btn">
-                    <i class="bi bi-question-diamond-fill"></i>
+                    class="list-group-item list-group-item-action qg-list-btn">
+                    <i class="bi bi-question-diamond-fill me-1"></i>
                     Whats New
                 </a>
+
+                <button type="button" class="list-group-item list-group-item-action qg-list-btn" (click)="logout()">
+                    <i class="fa-solid fa-right-from-bracket me-1"></i>
+                    Logout
+                </button>
                 <!-- <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button> -->
             </div>
         </div>

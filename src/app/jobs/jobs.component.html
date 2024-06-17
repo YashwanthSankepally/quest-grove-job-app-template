@@ -1,73 +1,148 @@
 <app-header></app-header>
-<section class="qg-jobs-section">
-	<div class="qg-cards-container">
-		<div class="card qg-card" style="width: 18rem;" *ngFor="let job of jobsArray; let i = index" [tabIndex]="0"
-		aria-label="job card">
-			<div class="card-body qg-card-body">
-				<h2 class="card-title">{{job.role}}</h2>
-				<h3 class="card-subtitle mb-2 text-body-secondary">{{job.companyName}}</h3>
-				<p class="card-text text-truncate">{{job.aboutJobRole}}</p>
-				<div class="qg-btn-container">
-					<button class="card-link btn btn-primary" (click)="apply(job)">
-						{{ job.isApplied ? 'Applied' : 'Apply' }}
-					</button>
-					<button type="button" class="btn btn-info card-link" data-bs-toggle="modal"
-						[attr.data-bs-target]="'#staticBackdrop' + i">View More</button>
-					<button type="button" class="border-0 bg-transparent qg-arrow-hover-icon" (click)="more(job)"
-						aria-label="View in page" title="View in page">
-						<i class="fa-solid fa-angles-right"></i>
-					</button>
 
-					<!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
-					class="qg-arrow-hover-icon">
-						<mat-icon>more_vert</mat-icon>
-					</button> -->
-					<mat-menu #menu="matMenu">
-						<button mat-menu-item (click)="more(job)">
-						  View in page
-						</button>
-					</mat-menu>
+<section class="qg-app-section">
+  <div class="qg-cards-container">
+    <div class="qg-header-container d-flex flex-row justify-content-between align-items-center">
+      <div class="qg-search-input-container mt-2 ms-3">
+        <input type="search" name="search" id="qgJobsSearch" placeholder="Search role" class="qg-input"
+          aria-label="Search jobs" (input)="searchJobs($event)">
+        <span class="qg-search-icon"><i class="bi bi-search"></i></span>
+      </div>
+      <div class="qg-buttons-container ms-auto d-flex flex-row justify-content-center align-items-center">
+        <!-- <button matTooltip="Create Job" aria-label="Create Job" class="bg-transparent border-0">
+          <i class="fa-solid fa-plus"></i>
+        </button> -->
+        <button class="border-0 bg-transparent qg-icon-btn qg-filters-offcanvas" type="button"
+          data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop"
+          aria-label="Jobs filter" matTooltip="Jobs Filter">
+          <i class="bi bi-funnel qg-funnel-filter-icon"></i>
+        </button>
+      </div>
+    </div>
+    <hr class="ms-2 me-2">
+    <div class=" d-flex flex-wrap justify-content-center">
+      <ng-container *ngFor="let job of filteredJobsArray; let i = index">
+        <div class="card qg-card m-1" style="width: 18rem;" [tabIndex]="0" aria-label="job card">
+          <!-- *ngIf="showAllJobs || job.displayJobCard" -->
+          <div class="card-body qg-card-body">
+            <h2 class="card-title">{{job.role}}</h2>
+            <h3 class="card-subtitle mb-2 text-body-secondary qg-h3">{{job.companyName}}</h3>
+            <p class="card-text text-truncate">{{job.aboutJobRole}}</p>
+            <div class="qg-btn-container">
+              <button class="card-link btn btn-primary" (click)="apply(job)">
+                {{ job.isApplied ? 'Applied' : 'Apply' }}
+              </button>
+              <button type="button" class="btn btn-info card-link" data-bs-toggle="modal"
+                [attr.data-bs-target]="'#staticBackdrop' + i">View More</button>
+              <button type="button" class="border-0 bg-transparent qg-arrow-hover-icon" (click)="more(job)"
+                aria-label="View in page" title="View in page">
+                <i class="fa-solid fa-angles-right"></i>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="more(job)">
+                  View in page
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+        </div>
+      </ng-container>
 
-				</div>
-			</div>
-		</div>
-	</div>
+      <div class="card qg-card qg-no-jobs-container m-1" style="width: 18rem;" [tabIndex]="0">
+        <div class="card-body qg-no-jobs-body d-flex flex-column justify-content-center align-items-center">
+          <div>
+            <picture>
+              <source srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f61e/512.webp" type="image/webp">
+              <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f61e/512.gif" alt="😞 animated emoji"
+                class="qg-frown-emoji">
+            </picture>
+          </div>
+          <strong class="qg-statement mt-2">
+            <i class="fa-solid fa-face-frown"></i> No More Jobs
+          </strong>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="qg-modal-section">
-	<div class="qg-modal-popup-container" *ngFor="let job of jobsArray; let i = index">
-		<!-- Modal -->
-		<div class="modal" [attr.id]="'staticBackdrop' + i" data-bs-backdrop="static" data-bs-keyboard="true"
-			tabindex="-1" [attr.aria-labelledby]="'staticBackdropLabel' + i" aria-hidden="true">
-			<div class="modal-dialog qg-modal-popup-dialog">
-				<div class="modal-content qg-modal-content">
-					<div class="modal-header">
-						<h1 class="modal-title fs-5" [attr.id]="'staticBackdropLabel' + i">{{job.companyName}}</h1>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body qg-modal-body">
-						<div class="qg-modal-job-container">
-							<p><i class="fa-solid fa-id-badge me-1"></i> {{job.role}}</p>
-							<p><i class="fa-solid fa-screwdriver-wrench me-1"></i> {{job.skills}}</p>
-							<p><i class="fa-solid fa-indian-rupee-sign me-1"></i> {{job.Salary}}</p>
-							<p><i class="fa-solid fa-business-time me-1"></i> {{job.Experience}}</p>
-							<p><i class="fa-solid fa-briefcase me-1"></i> {{job.aboutJobRole}}</p>
-							<p><i class="fa-solid fa-building me-1"></i> {{job.aboutCompany}}</p>
-							<p><i class="fa-solid fa-map-marker-alt me-1"></i> {{job.Address}}</p>
-							<p><i class="fa-solid fa-city me-1"></i> {{job.City}}</p>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<!-- <button type="button" class="btn btn-info" (click)="more(job)">
-							View More
-						</button> -->
-						<button type="button" class="btn btn-primary" (click)="apply(job)">
-							{{ job.isApplied ? 'Applied' : 'Apply' }}
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="qg-modal-popup-container" *ngFor="let job of jobsArray; let i = index">
+    <!-- Modal -->
+    <div class="modal" [attr.id]="'staticBackdrop' + i" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+      [attr.aria-labelledby]="'staticBackdropLabel' + i" aria-hidden="true">
+      <div class="modal-dialog qg-modal-popup-dialog">
+        <div class="modal-content qg-modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" [attr.id]="'staticBackdropLabel' + i">{{job.companyName}}</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body qg-modal-body">
+            <div class="qg-modal-job-container" [tabIndex]="0">
+              <p><i class="fa-solid fa-id-badge me-1"></i> {{job.role}}</p>
+              <p><i class="fa-solid fa-screwdriver-wrench me-1"></i> {{job.skills}}</p>
+              <p><i class="fa-solid fa-indian-rupee-sign me-1"></i> {{job.Salary}}</p>
+              <p><i class="fa-solid fa-business-time me-1"></i> {{job.Experience}}</p>
+              <p><i class="fa-solid fa-briefcase me-1"></i> {{job.aboutJobRole}}</p>
+              <p><i class="fa-solid fa-building me-1"></i> {{job.aboutCompany}}</p>
+              <p><i class="fa-solid fa-map-marker-alt me-1"></i> {{job.Address}}</p>
+              <p><i class="fa-solid fa-city me-1"></i> {{job.City}}</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="apply(job)">
+              {{ job.isApplied ? 'Applied' : 'Apply' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="qga-offcanvas-section">
+  <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop"
+    aria-labelledby="staticBackdropLabel" style="width: 250px;">
+    <div class="offcanvas-header">
+      <h1 class="offcanvas-title" id="staticBackdropLabel">Offcanvas</h1>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+
+      <div class="qg-offcanvas-filters-container">
+
+        <div>
+          <input type="checkbox" id="allJobs" (change)="toggleAllJobs($event)" [(ngModel)]="showAllJobs" checked>
+          <label for="allJobs">All Jobs</label>
+        </div>
+
+        <div>
+          <label for="salary">Salary</label> <br>
+          <div class="d-flex flex-row">
+            <input type="range" id="salary" min="1000" max="1000000" [(ngModel)]="salaryValue"
+              (input)="onSalaryChange($event)" step="1000"> <input type="number" [(ngModel)]="salaryValue"
+              style="width: 80px;">
+          </div>
+          <!-- Display the current value of the salary range input -->
+          <p>Selected Salary: {{ salaryValue }}</p>
+        </div>
+
+        <div class="mt-2">
+          <strong>Category</strong> <br>
+          <ng-container *ngFor="let job of jobsArray">
+            <div>
+              <input type="checkbox" id="{{job.category}}" (change)="toggleCategory(job.category)"
+                [checked]="selectedCategories.includes(job.category)">
+              <label for="{{job.category}}" class="ms-1">
+                {{job.category}}
+              </label>
+            </div>
+          </ng-container>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 </section>

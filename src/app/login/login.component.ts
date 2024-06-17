@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   showLoginPassword: boolean = false;
   showRegisterPassword: boolean = false;
 
-  constructor(private fb: FormBuilder, private router:Router) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -43,20 +43,20 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.isLogin) {
-      // Handle login logic
       if (this.loginForm.valid) {
         console.log('Login Form Submitted', this.loginForm.value);
-        this.router.navigate(['home'])
+        localStorage.setItem('email', this.loginForm.value.email); // Storing email in localStorage
+        localStorage.setItem('password', this.loginForm.value.password); // Storing password in localStorage
+        this.router.navigate(['home']);
       }
-
     } else {
-      // Handle register logic
       if (this.registerForm.valid) {
         console.log('Register Form Submitted', this.registerForm.value);
-        this.router.navigate(['home'])
+        localStorage.setItem('username', this.registerForm.value.username); // Storing username in localStorage
+        localStorage.setItem('email', this.registerForm.value.email); // Storing email in localStorage
+        localStorage.setItem('password', this.loginForm.value.password); // Storing password in localStorage
+        this.router.navigate(['home']);
       }
-
     }
   }
-  
 }

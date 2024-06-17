@@ -1,17 +1,32 @@
 <app-header></app-header>
 
-<section class="qg-courses-section">
-    <div class="qg-courses-container">
-        <div class="card qg-card" style="width: 18rem;" *ngFor="let course of coursesArray" [tabIndex]="0">
-            <img src="{{course.thumbnail}}" class="card-img-top" alt="course logo">
-            <div class="card-body qg-card-body">
-              <h1 class="card-title text-truncate"> {{course.courseTitle}} </h1>
-              <p class="card-text text-truncate" title="{{course.info}}"> {{course.info}} </p>
-              <a href="{{course.playlistUrl}}" target="_blank" class="btn qg-yt-btn">
-                <i class="fa-brands fa-youtube"></i>
-                Watch in YouTube
-              </a>
+<section class="qg-app-section">
+  <div class="qg-courses-container">
+    <ng-container *ngFor="let course of coursesArray">
+      <div class="card qg-card" style="width: 18rem;" tabindex="0">
+        <img [src]="course.thumbnail" class="card-img-top" [alt]="course.courseTitle + ' playlist thumbnail image'">
+        <div class="card-body qg-card-body">
+          <h1 class="card-title text-truncate qg-h1" matTooltip="{{course.courseTitle}}">{{course.courseTitle}}</h1>
+          <p class="card-text qg-text-truncate" matTooltip="{{course.info}}">{{course.info}}</p>
+          <div class="d-flex flex-row justify-content-between">
+            <a [href]="course.playlistUrl" target="_blank" class="btn qg-yt-btn" [attr.aria-label]="course.courseTitle">
+              <i class="fa-brands fa-youtube"></i>
+              Go to Playlist
+            </a>
+            <div class="d-flex flex-row qg-hover-icons">
+              <button (click)="toggleFavorite(course)" class="bg-transparent border-0 qg-favorite-btn"
+                [attr.aria-label]="course.favorite ? 'Course added to Favorites' + 'Favorite button' : 'Course removed from Favorites' + 'Favorite button'"
+                matTooltip="Favorite">
+                <i class="fa" [ngClass]="course.favorite ? 'fa-solid fa-star qg-favourite-icon' : 'fa-regular fa-star'"></i>
+              </button>
+              <button class="bg-transparent border-0 qg-share-btn"
+                [attr.aria-label]="'Share ' + course.courseTitle + ' course'" matTooltip="Share">
+                <i class="fa fa-solid fa-share"></i>
+              </button>
             </div>
           </div>
-    </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
 </section>

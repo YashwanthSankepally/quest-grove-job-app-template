@@ -1,7 +1,7 @@
 @import '../../assets/scss/mixins.scss';
 @import '../../assets/scss/variables.scss';
 
-.qga-header-section {
+.qg-app-section {
     background-color: #f8f9fa; /* Light background color */
     border-bottom: 1px solid #dee2e6; /* Bottom border for separation */
     .navbar {
@@ -9,8 +9,16 @@
         justify-content: space-between;
         align-items: center;
         padding: 0.5rem 1rem;
-        height: 50px;
+        height: 60px;
         box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+
+        .qg-nav-bar-container-fluid {
+            #navbarSupportedContent {
+                border-radius: 5px;
+                padding: 5px;
+                width: 100vw;
+            }
+        }
 
         .qga-logo-container {
             display: flex;
@@ -25,6 +33,7 @@
             .qga-nav-logo {
                 height: 40px; /* Logo height */
                 margin-right: 10px; /* Space between logo and text */
+                border-radius: 50%;
             }
             h1 {
                 font-size: 1.5rem;
@@ -108,13 +117,36 @@
             }
 
             .qg-profile-container {
-                margin: 5px;
+                // margin: 5px;
+                margin: 5px 0px;
+                border: 1px solid #bbbbbb;
+                padding: 5px;
+                border-radius: 5px;
 
                 .qg-img-div {
                     .qg-profile-image {
                         border-radius: 50%;
-                        height: 75px;
-                        width: 75px;
+                        height: 50px;
+                        width: 50px;
+                    }
+                }
+
+                .qg-profile-details-container {
+                    .qg-edit-profile-btn {
+                        background-color: #8a2be2;
+                        color: #ffffff;
+                        padding: 5px;
+                        border: none;
+                        border-radius: 5px;
+
+                        &:hover {
+                            background-color: #0000ff;
+                        }
+
+                        &:focus-visible {
+                            border: 1px solid #000000;
+                            background-color: #0000ff;
+                        }
                     }
                 }
             }

@@ -9,6 +9,10 @@ import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { SettingsComponent } from './settings/settings.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { ResumeComponent } from './resume/resume.component';
+import { FaqsComponent } from './faqs/faqs.component';
+import { QgEduplayComponent } from './qg-eduplay/qg-eduplay.component';
+import { BlogComponent } from './blog/blog.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -20,6 +24,10 @@ const routes: Routes = [
   { path: 'edit-profile', component: EditProfileComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'feedback', component: FeedbackComponent },
+  { path: 'resume', component: ResumeComponent },
+  { path: 'faqs', component: FaqsComponent },
+  { path: 'qg-eduplay', component: QgEduplayComponent },
+  { path: 'blog', component: BlogComponent },
 ];
 
 @NgModule({

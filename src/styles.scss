@@ -1,67 +1,14 @@
 /* Global styles */
 html, body {
-    height: 100%;
-  }
-  
-  body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-  }
-  
-  // /* Custom scrollbar for body */
-  // body::-webkit-scrollbar {
-  //   width: 8px; /* width of the entire scrollbar */
-  // }
-  
-  // body::-webkit-scrollbar-track {
-  //   background: initial; /* default color of the tracking area */
-  // }
-  
-  // body::-webkit-scrollbar-thumb {
-  //   background-color: initial; /* default color of the scroll thumb */
-  //   border-radius: 10px; /* roundness of the scroll thumb */
-  //   border: 2px solid transparent; /* creates padding around scroll thumb */
-  // }
-  
-  // /* Custom scrollbar for div containers */
-  // div::-webkit-scrollbar {
-  //   width: 8px; /* width of the entire scrollbar */
-  // }
-  
-  // div::-webkit-scrollbar-track {
-  //   background: initial; /* default color of the tracking area */
-  // }
-  
-  // div::-webkit-scrollbar-thumb {
-  //   background-color: initial; /* default color of the scroll thumb */
-  //   border-radius: 10px; /* roundness of the scroll thumb */
-  //   border: 2px solid transparent; /* creates padding around scroll thumb */
-  // }
-  
-  /* Firefox scrollbar styles */
-  body, div {
-    scrollbar-width: thin;
-    scrollbar-color: initial initial;
-  }
-  
-  /* Custom scrollbar for other browsers (fallback) */
-  body, div {
-    &::-moz-scrollbar {
-      width: 8px;
-    }
-  
-    &::-moz-scrollbar-track {
-      background: initial;
-    }
-  
-    &::-moz-scrollbar-thumb {
-      background-color: initial;
-      border-radius: 10px;
-      border: 2px solid transparent;
-    }
-  }
-  
-  /* Webkit (Chrome, Safari, etc.) scrollbar */
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Webkit (Chrome, Safari, etc.) scrollbar */
 /* Track */
 ::-webkit-scrollbar {
   width: 6px; /* Width of the scrollbar */
@@ -77,5 +24,37 @@ html, body {
 ::-webkit-scrollbar-thumb:hover {
   background: #555; /* Color of the handle when hovered */
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+
+  .navbar,
+  .offcanvas,
+  .list-group-item,
+  .qg-profile-container,
+  .qg-card,
+  .qg-h3,
+  .qg-h1,
+  .fa,
+  .qg-nav {
+    background-color: #333333 !important;
+    color: #ffffff !important;
+  }
+
+  .qg-list-btn {
+    &:hover, &:focus-visible {
+      color: #0b5ed7 !important;
+    }
+  }
+
+  .btn-success {
+    background-color: #3a3a3a;
+    border-color: #3a3a3a;
+  }
+
+  .form-control {
+    background-color: #333333;
+    color: #ffffff;
+  }
+}

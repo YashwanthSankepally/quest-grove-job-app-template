@@ -1,7 +1,7 @@
 @import '../../assets/scss/mixins.scss';
 @import '../../assets/scss/variables.scss';
 
-.qg-jobs-section {
+.qg-app-section {
     display: flex;
     height: 100vh;
     justify-content: center;
@@ -10,18 +10,57 @@
 
     .qg-cards-container {
         display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
+        flex-direction: column; /* Changed to column to ensure header is on top */
         height: 100%;
-        width: 74%;
+        width: 95%;
         border: 1px solid $border-color;
         overflow-y: scroll;
         margin-bottom: 10px;
         border-radius: 8px;
 
-        .qg-card {
-            margin: 10px;
+        .qg-header-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
 
+            .qg-search-input-container {
+                position: relative;
+                width: 300px;
+
+                .qg-input {
+                    width: 100%;
+                    padding-right: 40px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 30px;
+                }
+
+                .qg-search-icon {
+                    position: absolute;
+                    right: 10px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    pointer-events: none;
+                }
+            }
+
+            .qg-buttons-container {
+                margin-left: auto;
+
+                .qg-icon-btn {
+                    height: 28px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 8px;
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        .qg-card {
             .qg-card-body {
                 .qg-btn-container {
                     display: flex;
@@ -33,9 +72,11 @@
                         box-shadow: none !important;
                     }
 
-                    // .qg-view-more-btn {
-                    //     @include infoBtn;
-                    // }
+                    @media screen and (max-width: 260px) {
+                        button {
+                            margin-bottom: 5px;
+                        }
+                    }
                 }
             }
 
@@ -44,11 +85,25 @@
             }
 
             &:hover .qg-arrow-hover-icon,
-            &:focus-within .qg-arrow-hover-icon {
+            &:focus-within .qg-arrow-hover-icon, &:focus-visible .qg-arrow-hover-icon {
                 display: flex;
                 margin-left: auto;
                 justify-content: center;
                 align-items: center;
+            }
+
+            .qg-no-jobs-body {
+                box-shadow: 0 0 20px gray;
+                border-radius: 5px;
+
+                .qg-frown-emoji {
+                    height: 120px;
+                    width: 120px;
+                }
+
+                .qg-statement {
+                    font-size: xx-large;
+                }
             }
         }
     }
@@ -76,8 +131,6 @@
                         display: flex;
                         flex-direction: column;
                         flex-wrap: wrap;
-                        // align-items: center; /* Center content horizontally */
-                        // text-align: center;  /* Center text */
 
                         p {
                             margin: 5px;

@@ -1,7 +1,7 @@
 @import '../../assets/scss/mixins.scss';
 @import '../../assets/scss/variables.scss';
 
-.qg-courses-section {
+.qg-app-section {
     display: flex;
     height: 100vh;
     justify-content: center;
@@ -20,12 +20,22 @@
         border-radius: 8px;
 
         .qg-card {
-            margin: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
 
             .qg-card-body {
+                padding: 10px;
+
                 .qg-yt-btn {
-                    background-color: #ff0000;
+                    background-color: #E60000;
                     color: #ffffff;
+                    padding: 5px 10px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
 
                     &:hover {
                         background-color: #CC0000;
@@ -35,6 +45,30 @@
                         border: 2px solid black;
                     }
                 }
+
+                .qg-hover-icons {
+                    display: none;
+                }
+
+                .qg-text-truncate {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 3; /* Number of lines to show */
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                .qg-favorite-btn {
+                    .qg-favourite-icon {
+                        color: #f6b600;
+                    }
+                }
+            }
+
+            &:hover .qg-hover-icons,
+            &:focus-within .qg-hover-icons,
+            &:focus-visible .qg-hover-icons {
+                display: flex;
             }
         }
     }

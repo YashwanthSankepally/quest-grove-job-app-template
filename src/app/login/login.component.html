@@ -1,45 +1,56 @@
 <div class="container">
   <div class="form-container">
     <h2>{{ isLogin ? 'Login' : 'Register' }}</h2>
-    
+
     <form [formGroup]="isLogin ? loginForm : registerForm" (ngSubmit)="onSubmit()">
-      
+
       <div *ngIf="!isLogin" class="form-group">
         <label for="username">Username</label>
         <input id="username" formControlName="username" type="text" class="form-control" />
-        <div *ngIf="registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)" class="error">
+        <div
+          *ngIf="registerForm.get('username')?.invalid && (registerForm.get('username')?.dirty || registerForm.get('username')?.touched)"
+          class="error">
           Username is required.
         </div>
       </div>
-      
+
       <div class="form-group">
         <label for="email">Email</label>
         <input id="email" formControlName="email" type="email" class="form-control" />
-        <div *ngIf="(isLogin ? loginForm : registerForm).get('email')?.invalid && ((isLogin ? loginForm : registerForm).get('email')?.dirty || (isLogin ? loginForm : registerForm).get('email')?.touched)" class="error">
+        <div
+          *ngIf="(isLogin ? loginForm : registerForm).get('email')?.invalid && ((isLogin ? loginForm : registerForm).get('email')?.dirty || (isLogin ? loginForm : registerForm).get('email')?.touched)"
+          class="error">
           Enter a valid email.
         </div>
       </div>
-      
+
       <div class="form-group password-group">
         <label for="password">Password</label>
         <div class="input-wrapper">
-          <input id="password" [type]="isLogin ? (showLoginPassword ? 'text' : 'password') : (showRegisterPassword ? 'text' : 'password')" formControlName="password" class="form-control" />
+          <input id="password"
+            [type]="isLogin ? (showLoginPassword ? 'text' : 'password') : (showRegisterPassword ? 'text' : 'password')"
+            formControlName="password" class="form-control" />
           <i class="fa p-1"
-             [ngClass]="{'fa-eye': (isLogin ? showLoginPassword : showRegisterPassword), 'fa-eye-slash': !(isLogin ? showLoginPassword : showRegisterPassword)}"
-             (click)="isLogin ? toggleLoginPasswordVisibility() : toggleRegisterPasswordVisibility()"
-             [attr.aria-label]="isLogin ? (showLoginPassword ? 'Hide password' : 'Show password') : (showRegisterPassword ? 'Hide password' : 'Show password')" [tabIndex]="0">
+            [ngClass]="{'fa-eye': (isLogin ? showLoginPassword : showRegisterPassword), 'fa-eye-slash': !(isLogin ? showLoginPassword : showRegisterPassword)}"
+            (click)="isLogin ? toggleLoginPasswordVisibility() : toggleRegisterPasswordVisibility()"
+            [attr.aria-label]="isLogin ? (showLoginPassword ? 'Hide password' : 'Show password') : (showRegisterPassword ? 'Hide password' : 'Show password')"
+            [tabIndex]="0"
+            (keydown.enter)="isLogin ? toggleLoginPasswordVisibility() : toggleRegisterPasswordVisibility()"
+            (keydown.space)="isLogin ? toggleLoginPasswordVisibility() : toggleRegisterPasswordVisibility()">
           </i>
         </div>
-        <div *ngIf="(isLogin ? loginForm : registerForm).get('password')?.invalid && ((isLogin ? loginForm : registerForm).get('password')?.dirty || (isLogin ? loginForm : registerForm).get('password')?.touched)" class="error">
+        <div
+          *ngIf="(isLogin ? loginForm : registerForm).get('password')?.invalid && ((isLogin ? loginForm : registerForm).get('password')?.dirty || (isLogin ? loginForm : registerForm).get('password')?.touched)"
+          class="error">
           Password must be at least 8 characters.
         </div>
       </div>
-      
+
       <button type="submit" class="btn btn-primary" [disabled]="(isLogin ? loginForm : registerForm).invalid">
         {{ isLogin ? 'Login' : 'Register' }}
       </button>
     </form>
-    
+
     <button class="btn btn-secondary" (click)="toggleForm()">
       {{ isLogin ? 'Switch to Register' : 'Switch to Login' }}
     </button>
