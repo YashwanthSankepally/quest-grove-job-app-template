@@ -1,5 +1,35 @@
 <app-header></app-header>
 
 <section class="qg-app-section">
-    <h1>settings works!</h1>
+    <h1>
+        <i class="fa-solid fa-gear"></i>
+        Settings
+    </h1>
+    <div class="qg-settings-container">
+        <div class="d-flex flex-column">
+            <label for="city">Select City or cities</label>
+            <p-chips [(ngModel)]="values" id="city" class="qg-png-input" attr.aria-label="{{values}}"></p-chips>
+        </div>
+        <div class="d-flex flex-row qg-toggle-switch">
+            <p>
+                <mat-slide-toggle [(ngModel)]="notificationsEnabled" labelPosition="before">
+                    Notifications
+                </mat-slide-toggle>
+            </p>
+        </div>
+        <div class="d-flex flex-column qg-job-type">
+            <label for="jobType">Select Job Type</label>
+            <div>
+                <mat-checkbox [(ngModel)]="jobTypes.fullTime" id="fullTime">Full Time</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox [(ngModel)]="jobTypes.partTime" id="partTime">Part Time</mat-checkbox>
+            </div>
+            <div>
+                <mat-checkbox [(ngModel)]="jobTypes.contract" id="contract">Contract</mat-checkbox>
+            </div>
+        </div>
+        <button class="qg-settings-save-btn btn btn-primary ms-auto" (click)="saveSettings()">Save
+            Settings</button>
+    </div>
 </section>

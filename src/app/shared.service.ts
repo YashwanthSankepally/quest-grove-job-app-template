@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SharedService {
-  private displayJobsSubject = new BehaviorSubject<boolean>(false);
-  displayJobs$ = this.displayJobsSubject.asObservable();
+  private usernameSource = new BehaviorSubject<string>(
+    localStorage.getItem('username') || ''
+  );
+  currentUsername: Observable<string> = this.usernameSource.asObservable();
 
-  setDisplayJobs(value: boolean) {
-    this.displayJobsSubject.next(value);
-  }
+  constructor() {}
 
-  getDisplayJobs(): boolean {
-    return this.displayJobsSubject.value;
+  changeUsername(username: string): void {
+    localStorage.setItem('username', username);
+    this.usernameSource.next(username);
   }
 }

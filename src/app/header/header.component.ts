@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,11 @@ export class HeaderComponent implements OnInit {
   defaultImgUrl =
     'https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg';
 
-  constructor(private router: Router, private renderer: Renderer2) {}
+  constructor(
+    private router: Router,
+    private renderer: Renderer2,
+    private sharedService: SharedService
+  ) {}
 
   ngOnInit(): void {
     this.isDarkMode = localStorage.getItem('darkMode') === 'true';
@@ -22,7 +27,9 @@ export class HeaderComponent implements OnInit {
       this.darkModeText = 'Light Mode';
     }
 
-    this.userName = localStorage.getItem('username') || '';
+    this.sharedService.currentUsername.subscribe((username: string) => {
+      this.userName = username;
+    });
   }
 
   home() {
@@ -83,6 +90,50 @@ export class HeaderComponent implements OnInit {
       this.renderer.removeClass(document.body, 'dark-mode');
       this.darkModeText = 'Dark Mode';
       localStorage.setItem('darkMode', 'false');
+    }
+  }
+
+  searchComponent(event: Event): void {
+    event.preventDefault();
+    const searchInput = (event.target as HTMLFormElement)
+      .querySelector('input')
+      ?.value.toLowerCase();
+
+    if (searchInput) {
+      switch (searchInput) {
+        case 'home':
+          this.router.navigate(['/home']);
+          break;
+        case 'jobs':
+          this.router.navigate(['/jobs']);
+          break;
+        case 'courses':
+          this.router.navigate(['/courses']);
+          break;
+        case 'edit profile':
+          this.router.navigate(['/edit-profile']);
+          break;
+        case 'applied jobs':
+          this.router.navigate(['/applied-jobs']);
+          break;
+        case 'qg eduplay':
+          this.router.navigate(['/qg-eduplay']);
+          break;
+        case 'settings':
+          this.router.navigate(['/settings']);
+          break;
+        case 'faqs':
+          this.router.navigate(['/faqs']);
+          break;
+        case 'contact':
+          this.router.navigate(['/contact']);
+          break;
+        case 'resume':
+          this.router.navigate(['/resume']);
+          break;
+        default:
+          alert('Component not found');
+      }
     }
   }
 }

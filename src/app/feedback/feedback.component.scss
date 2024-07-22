@@ -3,8 +3,69 @@
 
 .qg-app-section {
     display: flex;
-    height: 100vh;
     justify-content: center;
     align-items: center;
-    margin-top: 80px;
+    height: 100vh;
+    flex-direction: column;
+
+    .form-group {
+        margin-bottom: 15px;
+
+        .radio-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            .radio-input {
+                /* Custom radio button style */
+                width: 18px;
+                height: 18px;
+                border: 2px solid #ccc;
+                border-radius: 50%;
+                margin-right: 5px;
+                display: inline-block;
+                position: relative;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    display: none; /* Initially hide the check icon */
+                }
+            }
+
+            input[type="radio"] {
+                /* Hide default browser styles */
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                outline: none; /* Remove default outline */
+
+                /* Ensure there's a visible indicator (usually a circle) */
+                width: 18px;
+                height: 18px;
+                opacity: 0; /* Hide the actual radio button */
+
+                &:checked + .radio-input:before {
+                    display: block; /* Show the check icon when checked */
+                    font-family: 'Font Awesome 6 Solid';
+                    // content: '\263B'; /* Unicode for the circle check icon */
+                    color: #000000;
+                    font-size: 14px;
+                }
+
+                &:focus-visible {
+                    border: 1px solid #000000 !important;
+                    outline: 1px solid #000000 !important;
+                }
+            }
+        }
+    }
+
+    .text-danger {
+        color: red;
+        font-size: 12px;
+    }
 }

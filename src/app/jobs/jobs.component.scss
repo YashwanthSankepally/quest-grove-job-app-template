@@ -6,7 +6,7 @@
     height: 100vh;
     justify-content: center;
     align-items: center;
-    margin-top: 80px;
+    margin-bottom: 10px;
 
     .qg-cards-container {
         display: flex;
@@ -14,7 +14,7 @@
         height: 100%;
         width: 95%;
         border: 1px solid $border-color;
-        overflow-y: scroll;
+        // overflow-y: scroll;
         margin-bottom: 10px;
         border-radius: 8px;
 
@@ -23,6 +23,10 @@
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
+            position: -webkit-sticky;
+            border-bottom: 1px solid $border-color;
+            width: 100%;
+            padding-bottom: 8px;
 
             .qg-search-input-container {
                 position: relative;
@@ -60,17 +64,27 @@
             }
         }
 
+        .qg-cards-section {
+            margin-top: 5px;
+            overflow: scroll;
+            // position: relative;
+        }
+
         .qg-card {
+            width: 18rem;
+
+            
+            
             .qg-card-body {
                 .qg-btn-container {
                     display: flex;
                     flex-direction: row;
                     flex-wrap: wrap;
 
-                    button:focus-visible {
-                        border: 2px solid #000000 !important;
-                        box-shadow: none !important;
-                    }
+                    // button:focus-visible {
+                    //     border: 2px solid #000000 !important;
+                    //     box-shadow: none !important;
+                    // }
 
                     @media screen and (max-width: 260px) {
                         button {
@@ -80,30 +94,16 @@
                 }
             }
 
-            .qg-arrow-hover-icon {
-                display: none;
+            .qg-hover-icons {
+                display: none !important;
             }
 
-            &:hover .qg-arrow-hover-icon,
-            &:focus-within .qg-arrow-hover-icon, &:focus-visible .qg-arrow-hover-icon {
-                display: flex;
+            &:hover .qg-hover-icons,
+            &:focus-within .qg-hover-icons, &:focus-visible .qg-hover-icons {
+                display: flex !important;
                 margin-left: auto;
                 justify-content: center;
                 align-items: center;
-            }
-
-            .qg-no-jobs-body {
-                box-shadow: 0 0 20px gray;
-                border-radius: 5px;
-
-                .qg-frown-emoji {
-                    height: 120px;
-                    width: 120px;
-                }
-
-                .qg-statement {
-                    font-size: xx-large;
-                }
             }
         }
     }

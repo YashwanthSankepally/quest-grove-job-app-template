@@ -26,6 +26,18 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { QgEduplayComponent } from './qg-eduplay/qg-eduplay.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BlogComponent } from './blog/blog.component';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { ChipsModule } from 'primeng/chips';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ToastModule } from 'primeng/toast';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -44,6 +56,7 @@ import { BlogComponent } from './blog/blog.component';
     FaqsComponent,
     QgEduplayComponent,
     BlogComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,8 +70,30 @@ import { BlogComponent } from './blog/blog.component';
     MatInputModule,
     MatFormFieldModule,
     MatTooltipModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+
+        useFactory: httpTranslateLoader,
+
+        deps: [HttpClient],
+      },
+    }),
+    MatTabsModule,
+    MatSidenavModule,
+    ChipsModule,
+    MatSlideToggleModule,
+    MatCheckboxModule,
+    ToastModule,
+    MatRadioModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

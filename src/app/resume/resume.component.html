@@ -1,5 +1,105 @@
 <app-header></app-header>
 
 <section class="qg-app-section">
-    <h1>Resume works!</h1>
+    <div class="container">
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked
+                (change)="toggleExperience(true)">
+            <label class="btn btn-outline-primary" for="btnradio1">Fresher</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off"
+                (change)="toggleExperience(false)">
+            <label class="btn btn-outline-primary" for="btnradio2">Experience</label>
+        </div>
+
+        <form [formGroup]="resumeForm">
+            <div *ngIf="isFresher">
+                <div>
+                    <label for="fullName">Full Name</label>
+                    <input formControlName="fullName" class="form-control" id="fullName" />
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input formControlName="email" class="form-control" id="email" />
+                </div>
+                <div>
+                    <label for="linkedin">LinkedIn Profile</label>
+                    <input formControlName="linkedin" class="form-control" id="linkedin" />
+                </div>
+                <div>
+                    <label for="address">Address</label>
+                    <input formControlName="address" class="form-control" id="address" />
+                </div>
+                <div>
+                    <label for="skills">Skills</label>
+                    <p-chips formControlName="skills" [(ngModel)]="values" id="skills"></p-chips>
+                </div>
+                <div>
+                    <label for="languages">Languages</label>
+                    <p-chips formControlName="languages" [(ngModel)]="languageValues" id="languages"></p-chips>
+                </div>
+                <div>
+                    <label for="profileSummary">Profile Summary</label>
+                    <input formControlName="profileSummary" class="form-control" id="profileSummary" />
+                </div>
+                <div formGroupName="education">
+                    <div formGroupName="graduation">
+                        <label for="institution">Graduation Institution</label>
+                        <input formControlName="institution" class="form-control" id="institution" />
+                        <label for="yearOfPassing">Year of Passing</label>
+                        <input formControlName="yearOfPassing" class="form-control" id="yearOfPassing" />
+                        <label class="percentage">Percentage/CGPA</label>
+                        <input formControlName="percentage" class="form-control" id="percentage" />
+                    </div>
+                    <div formGroupName="class12">
+                        <label for="class12">Class 12 Institution</label>
+                        <input formControlName="institution" class="form-control" id="class12" />
+                        <label for="yearOfPassing">Year of Passing</label>
+                        <input formControlName="yearOfPassing" class="form-control" id="yearOfPassing" />
+                        <label class="percentage">Percentage/CGPA</label>
+                        <input formControlName="percentage" class="form-control" id="percentage" />
+                    </div>
+                    <div formGroupName="class10">
+                        <label for="class10">Class 10 Institution</label>
+                        <input formControlName="institution" class="form-control" id="class10" />
+                        <label for="yearOfPassing">Year of Passing</label>
+                        <input formControlName="yearOfPassing" class="form-control" id="yearOfPassing" />
+                        <label class="percentage">Percentage/CGPA</label>
+                        <input formControlName="percentage" class="form-control" id="percentage" />
+                    </div>
+                </div>
+                <div>
+                    <label class="projects">Projects</label>
+                    <p-editor formControlName="projects" [(ngModel)]="text" [style]="{ height: '320px' }"
+                        id="projects"></p-editor>
+                </div>
+                <div>
+                    <label for="certificates">Certificates</label>
+                    <input formControlName="certificates" class="form-control" id="certificates" />
+                </div>
+            </div>
+
+            <div *ngIf="!isFresher">
+                <!-- Include all fresher fields -->
+                <ng-container *ngTemplateOutlet="freshersResumeTemplate"></ng-container>
+                <div>
+                    <label for="companyOrCompanies">Companies</label>
+                    <input formControlName="companies" class="form-control" id="companyOrCompanies" />
+                </div>
+                <div>
+                    <label for="pastSalary">Past Salary/Package</label>
+                    <input formControlName="pastSalary" class="form-control" id="pastSalary" />
+                </div>
+            </div>
+
+            <div class="d-flex flex-row flex-wrap">
+                <button class="btn btn-outline-primary m-1" (click)="save()">Save</button>
+                <button (click)="onDownload()" class="btn btn-primary m-1">Download PDF</button>
+            </div>
+        </form>
+    </div>
 </section>
+
+<ng-template #freshersResumeTemplate>
+    <!-- Include all fresher fields -->
+</ng-template>

@@ -5,12 +5,13 @@
     background-color: #f8f9fa; /* Light background color */
     border-bottom: 1px solid #dee2e6; /* Bottom border for separation */
     .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.5rem 1rem;
-        height: 60px;
+        // display: flex;
+        // justify-content: space-between;
+        // align-items: center;
+        // padding: 0.5rem 1rem;
+        // height: 60px;
         box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+
 
         .qg-nav-bar-container-fluid {
             #navbarSupportedContent {
@@ -122,6 +123,9 @@
                 border: 1px solid #bbbbbb;
                 padding: 5px;
                 border-radius: 5px;
+                background-image: url('https://img.freepik.com/free-vector/circles-background-dark-tones_60389-166.jpg?size=626&ext=jpg&ga=GA1.1.1518270500.1718236800&semt=ais_user');
+                background-repeat: no-repeat;
+                color: #ffffff;
 
                 .qg-img-div {
                     .qg-profile-image {

@@ -2,31 +2,136 @@
 
 <section class="qg-app-section">
   <div class="qg-courses-container">
-    <ng-container *ngFor="let course of coursesArray">
-      <div class="card qg-card" style="width: 18rem;" tabindex="0">
-        <img [src]="course.thumbnail" class="card-img-top" [alt]="course.courseTitle + ' playlist thumbnail image'">
-        <div class="card-body qg-card-body">
-          <h1 class="card-title text-truncate qg-h1" matTooltip="{{course.courseTitle}}">{{course.courseTitle}}</h1>
-          <p class="card-text qg-text-truncate" matTooltip="{{course.info}}">{{course.info}}</p>
-          <div class="d-flex flex-row justify-content-between">
-            <a [href]="course.playlistUrl" target="_blank" class="btn qg-yt-btn" [attr.aria-label]="course.courseTitle">
-              <i class="fa-brands fa-youtube"></i>
-              Go to Playlist
-            </a>
-            <div class="d-flex flex-row qg-hover-icons">
-              <button (click)="toggleFavorite(course)" class="bg-transparent border-0 qg-favorite-btn"
-                [attr.aria-label]="course.favorite ? 'Course added to Favorites' + 'Favorite button' : 'Course removed from Favorites' + 'Favorite button'"
-                matTooltip="Favorite">
-                <i class="fa" [ngClass]="course.favorite ? 'fa-solid fa-star qg-favourite-icon' : 'fa-regular fa-star'"></i>
-              </button>
-              <button class="bg-transparent border-0 qg-share-btn"
-                [attr.aria-label]="'Share ' + course.courseTitle + ' course'" matTooltip="Share">
-                <i class="fa fa-solid fa-share"></i>
-              </button>
+    <div class="d-flex flex-column justify-content-between m-2 align-items-start qg-header-container">
+      <div class="qg-search-input-container">
+        <input type="search" name="search" id="qgJobsSearch" placeholder="Search courses" class="qg-input ms-2"
+          aria-label="Search courses" (input)="searchCourses($event)">
+        <span class="qg-search-icon"><i class="bi bi-search"></i></span>
+      </div>
+    </div>
+
+    <hr class="ms-2 me-2 mt-2 mb-2">
+
+    <div class="d-flex flex-wrap justify-content-center">
+      <ng-container *ngFor="let course of filteredCourses, let i = index">
+        <div class="card qg-card" style="width: 18rem;" tabindex="0">
+          <img [src]="course.thumbnail" class="card-img-top" alt="course image">
+          <div class="card-body qg-card-body">
+            <h1 class="card-title text-truncate qg-h1" matTooltip="{{course.courseTitle}}">{{course.courseTitle}}</h1>
+            <p class="card-text qg-text-truncate" matTooltip="{{course.info}}">{{course.info}}</p>
+            <div class="d-flex flex-row justify-content-between">
+              <div class="d-flex flex-row flex-wrap">
+                <a [href]="course.playlistUrl" target="_blank" class="btn qg-yt-btn"
+                  [attr.aria-label]="('Play') + course.courseTitle + (' Playlist in YouTube')"
+                  [matTooltip]="('Play ') + (course.courseTitle) + (' Playlist in YouTube')">
+                  Play in <i class="fa-brands fa-youtube"></i>
+                </a>
+              </div>
+              <div class="d-flex flex-row qg-hover-icons">
+                <button (click)="toggleFavorite(course)" class="bg-transparent border-0 qg-favorite-btn"
+                  [attr.aria-label]="course.favorite ? 'Course added to Favorites' + 'Favorite button' : 'Course removed from Favorites' + 'Favorite button'"
+                  matTooltip="Favorite">
+                  <i class="fa"
+                    [ngClass]="course.favorite ? 'fa-solid fa-star qg-favourite-icon' : 'fa-regular fa-star'"></i>
+                </button>
+                <button class="bg-transparent border-0 qg-share-btn"
+                  [attr.aria-label]="'Share ' + course.courseTitle + ' course'" matTooltip="Share"
+                  data-bs-toggle="modal" [attr.data-bs-target]="'#staticBackdrop' + i">
+                  <i class="fa fa-solid fa-share"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </ng-container>
+      </ng-container>
+    </div>
   </div>
 </section>
+
+<section>
+  <div class="qg-modal-container" *ngFor="let course of filteredCourses, let i = index">
+    <!-- Modal -->
+    <div class="modal fade" [attr.id]="'staticBackdrop' + i" data-bs-backdrop="static" data-bs-keyboard="true"
+      tabindex="-1" [attr.aria-labelledby]="'staticBackdropLabel' + i" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" [attr.id]="'staticBackdropLabel' + i">Share {{course.courseTitle}}</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <div class="modal-body d-flex justify-content-center align-items-center">
+            <div class=" d-flex flex-row flex-wrap">
+              <div class="qg-icon-card">
+                <button class="border-0 bg-transparent qg-share-apps-btn p-2" title="Copy" aria-label="Copy"
+                  (click)="copy(course.playlistUrl)">
+                  <i class="fa-solid fa-copy qg-share-to-icon"></i>
+                </button>
+              </div>
+              <div class="qg-icon-card">
+                <button class="border-0 bg-transparent qg-share-apps-btn p-2" title="Whatsapp" aria-label="Whatsapp"
+                  (click)="shareToWhatsapp(course.playlistUrl)">
+                  <i class="fa-brands fa-whatsapp qg-share-to-icon"></i>
+                </button>
+              </div>
+              <div class="qg-icon-card">
+                <button class="border-0 bg-transparent qg-share-apps-btn p-2" title="Facebook" aria-label="Facebook"
+                  (click)="shareToFacebook(course.playlistUrl)">
+                  <i class="fa-brands fa-facebook qg-share-to-icon"></i>
+                </button>
+              </div>
+              <div class="qg-icon-card">
+                <button class="border-0 bg-transparent qg-share-apps-btn p-2" title="X (formerly Twitter)"
+                  aria-label="X (formerly Twitter)" (click)="shareToTwitter(course.playlistUrl)">
+                  <i class="fa-brands fa-x-twitter qg-share-to-icon"></i>
+                </button>
+              </div>
+              <div class="qg-icon-card">
+                <button class="border-0 bg-transparent qg-share-apps-btn p-2" title="Telegram" aria-label="Telegram"
+                  (click)="shareToTelegram(course.playlistUrl)">
+                  <i class="fa-brands fa-telegram qg-share-to-icon"></i>
+                </button>
+              </div>
+              <div class="qg-icon-card">
+                <button class="border-0 bg-transparent qg-share-apps-btn p-2" title="Mail" aria-label="Mail"
+                  (click)="shareToMail(course.playlistUrl)">
+                  <i class="fa-solid fa-envelope qg-share-to-icon"></i>
+                </button>
+              </div>
+              <div class="qg-icon-card">
+                <button class="border-0 bg-transparent qg-share-apps-btn p-2" title="LinkedIn" aria-label="LinkedIn"
+                  (click)="shareToLinkedIn(course.playlistUrl)">
+                  <i class="fa-brands fa-linkedin qg-share-to-icon"></i>
+                </button>
+              </div>
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Share</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Toast Container -->
+<div class="toast-container position-fixed top-0 end-0 p-3">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header bg-success">
+      <strong class="me-auto">
+        <i class="fa-solid fa-bell fa-shake"></i>
+        Notification
+      </strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="toast-body bg-primary">
+      Link copied to clipboard
+    </div>
+  </div>
+</div>

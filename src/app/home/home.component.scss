@@ -1,9 +1,19 @@
 @import '../../assets/scss/mixins.scss';
 @import '../../assets/scss/variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 .qg-app-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
+  margin-top: 10px;
+
+//   .wrapper {
+//     display: flex;
+//   }
+}
+
+.btn-selected {
+  background-color: #0000ff !important;
+  border-color: #0b5ed7 !important;
+  color: #fff !important;
 }

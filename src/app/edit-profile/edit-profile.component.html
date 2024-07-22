@@ -1,5 +1,43 @@
 <app-header></app-header>
 
 <section class="qg-app-section">
-    <h1>edit-profile works!</h1>
+    <div class="edit-profile-container">
+        <form [formGroup]="editProfileForm" class="d-flex flex-column justify-content-center">
+            <div class="form-group m-2">
+                <label for="upload">Upload New Profile Picture</label> <br />
+                <input type="file" id="upload" accept="image/*">
+            </div>
+            <div class="form-group m-2">
+                <label for="username">Username</label> <br />
+                <input type="text" id="username" formControlName="username" value="{{username}}"
+                    class="qg-input qg-edit-profile-input">
+                <div *ngIf="editProfileForm.get('username')?.touched && editProfileForm.get('username')?.invalid"
+                    class="qg-error">
+                    Username is required
+                </div>
+            </div>
+            <div class="form-group m-2">
+                <label for="email">Email</label> <br />
+                <input type="email" id="email" formControlName="email" class="qg-input qg-edit-profile-input">
+                <div *ngIf="editProfileForm.get('email')?.touched && editProfileForm.get('email')?.invalid"
+                    class="qg-error">
+                    Valid email is required
+                </div>
+            </div>
+            <div class="form-group m-2">
+                <label for="password">Password</label> <br />
+                <input type="password" id="password" formControlName="password" class="qg-input qg-edit-profile-input">
+                <div *ngIf="editProfileForm.get('password')?.touched && editProfileForm.get('password')?.invalid"
+                    class="qg-error">
+                    Password is required and must be at least 8 characters long
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
 </section>

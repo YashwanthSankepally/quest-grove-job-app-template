@@ -1,11 +1,13 @@
 <app-header></app-header>
 
 <section class="qg-app-section">
+  <!-- <app-sidebar class="qg-nav-sidebar"></app-sidebar> -->
   <div class="qg-cards-container">
+    <!-- <h1 class="text-center">Jobs</h1> -->
     <div class="qg-header-container d-flex flex-row justify-content-between align-items-center">
       <div class="qg-search-input-container mt-2 ms-3">
-        <input type="search" name="search" id="qgJobsSearch" placeholder="Search role" class="qg-input"
-          aria-label="Search jobs" (input)="searchJobs($event)">
+        <input type="search" name="search" id="qgJobsSearch" placeholder="Search role, company, skills, location"
+          class="qg-input" (input)="searchJobs($event)" [tabIndex]="0">
         <span class="qg-search-icon"><i class="bi bi-search"></i></span>
       </div>
       <div class="qg-buttons-container ms-auto d-flex flex-row justify-content-center align-items-center">
@@ -14,60 +16,63 @@
         </button> -->
         <button class="border-0 bg-transparent qg-icon-btn qg-filters-offcanvas" type="button"
           data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop"
-          aria-label="Jobs filter" matTooltip="Jobs Filter">
+          aria-label="Jobs filter" matTooltip="Jobs Filter" [tabIndex]="0">
           <i class="bi bi-funnel qg-funnel-filter-icon"></i>
         </button>
       </div>
     </div>
-    <hr class="ms-2 me-2">
-    <div class=" d-flex flex-wrap justify-content-center">
-      <ng-container *ngFor="let job of filteredJobsArray; let i = index">
-        <div class="card qg-card m-1" style="width: 18rem;" [tabIndex]="0" aria-label="job card">
+    <div class=" d-flex flex-wrap justify-content-center qg-cards-section">
+      <ng-container *ngFor="let job of filteredJobsArray; let i = index" class="ng">
+        <div class="card qg-card m-1" [tabIndex]="0">
           <!-- *ngIf="showAllJobs || job.displayJobCard" -->
           <div class="card-body qg-card-body">
             <h2 class="card-title">{{job.role}}</h2>
             <h3 class="card-subtitle mb-2 text-body-secondary qg-h3">{{job.companyName}}</h3>
             <p class="card-text text-truncate">{{job.aboutJobRole}}</p>
             <div class="qg-btn-container">
-              <button class="card-link btn btn-primary" (click)="apply(job)">
+              <button class="card-link btn btn-primary" (click)="apply(job)" [tabIndex]="0">
                 {{ job.isApplied ? 'Applied' : 'Apply' }}
               </button>
+
               <button type="button" class="btn btn-info card-link" data-bs-toggle="modal"
-                [attr.data-bs-target]="'#staticBackdrop' + i">View More</button>
-              <button type="button" class="border-0 bg-transparent qg-arrow-hover-icon" (click)="more(job)"
-                aria-label="View in page" title="View in page">
-                <i class="fa-solid fa-angles-right"></i>
+                [attr.data-bs-target]="'#staticBackdrop' + i" [tabIndex]="0">
+                More
               </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="more(job)">
-                  View in page
+
+              <!-- <button type="button" class="btn btn-info ms-2" (click)="more(job)" aria-label="View in page"
+                title="View in page">
+                <i class="fa-solid fa-angles-right"></i>
+              </button> -->
+              <div class="qg-hover-icons d-flex flex-row ms-auto">
+
+                <button (click)="toggleFavorite(job)" class="bg-transparent border-0 qg-favorite-btn"
+                  [attr.aria-label]="job.favorite ? 'Job added to Favorites' + 'Favorite button' : 'Job removed from Favorites' + 'Favorite button'"
+                  matTooltip="Favorite" [tabIndex]="0">
+                  <i class="fa"
+                    [ngClass]="job.favorite ? 'fa-solid fa-star qg-favourite-icon' : 'fa-regular fa-star'"></i>
                 </button>
-              </mat-menu>
+
+                <button type="button" class="bg-transparent border-0 qg-view-more-btn" (click)="more(job)"
+                  aria-label="View in page" matTooltip="View in page" [tabIndex]="0">
+                  <i class="fa-solid fa-angles-right"></i>
+                </button>
+
+                <!-- <button class="bg-transparent border-0 qg-share-btn" aria-label="Share" matTooltip="Share"
+                  [tabIndex]="0">
+                  <i class="fa fa-solid fa-share"></i>
+                </button> -->
+              </div>
             </div>
           </div>
         </div>
       </ng-container>
 
-      <div class="card qg-card qg-no-jobs-container m-1" style="width: 18rem;" [tabIndex]="0">
-        <div class="card-body qg-no-jobs-body d-flex flex-column justify-content-center align-items-center">
-          <div>
-            <picture>
-              <source srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f61e/512.webp" type="image/webp">
-              <img src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f61e/512.gif" alt="😞 animated emoji"
-                class="qg-frown-emoji">
-            </picture>
-          </div>
-          <strong class="qg-statement mt-2">
-            <i class="fa-solid fa-face-frown"></i> No More Jobs
-          </strong>
-        </div>
-      </div>
     </div>
   </div>
 </section>
 
 <section class="qg-modal-section">
-  <div class="qg-modal-popup-container" *ngFor="let job of jobsArray; let i = index">
+  <div class="qg-modal-popup-container" *ngFor="let job of filteredJobsArray; let i = index">
     <!-- Modal -->
     <div class="modal" [attr.id]="'staticBackdrop' + i" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
       [attr.aria-labelledby]="'staticBackdropLabel' + i" aria-hidden="true">
@@ -75,7 +80,9 @@
         <div class="modal-content qg-modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" [attr.id]="'staticBackdropLabel' + i">{{job.companyName}}</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
           </div>
           <div class="modal-body qg-modal-body">
             <div class="qg-modal-job-container" [tabIndex]="0">
@@ -103,10 +110,13 @@
 
 <section class="qga-offcanvas-section">
   <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop"
-    aria-labelledby="staticBackdropLabel" style="width: 250px;">
+    aria-labelledby="staticBackdropLabel" style="width: 250px; margin-top: 70px;">
     <div class="offcanvas-header">
       <h1 class="offcanvas-title" id="staticBackdropLabel">Offcanvas</h1>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <button type="button" class="btn-close d-flex justify-content-center align-items-center"
+        data-bs-dismiss="offcanvas" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>
     <div class="offcanvas-body">
 
@@ -146,3 +156,21 @@
     </div>
   </div>
 </section>
+
+<!-- Toast Container -->
+<div class="toast-container position-fixed top-0 end-0 p-3">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header bg-success">
+      <strong class="me-auto">
+        <i class="fa-solid fa-bell fa-shake"></i>
+        Notification
+      </strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="toast-body bg-primary">
+      Job application submitted
+    </div>
+  </div>
+</div>

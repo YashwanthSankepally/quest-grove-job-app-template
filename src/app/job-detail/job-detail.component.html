@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="qg-job-container">
+<section class="qg-job-container p-5">
   <h1>{{ job.companyName }}</h1>
   <p><strong>Role:</strong> {{ job.role }}</p>
   <p><strong>Skills:</strong> {{ job.skills.join(', ') }}</p>
@@ -9,7 +9,12 @@
   <p><strong>About Company:</strong> {{ job.aboutCompany }}</p>
   <p><strong>Address:</strong> {{ job.Address }}</p>
   <p><strong>City:</strong> {{ job.City }}</p>
-  <button class="btn btn-primary" (click)="apply(job)">
-    {{ job.isApplied ? 'Applied' : 'Apply' }}
-  </button>
-</div>
+  <div class="d-flex flex-row">
+    <button class="btn btn-primary me-1" (click)="apply(job)">
+      {{ job.isApplied ? 'Applied' : 'Apply' }}
+    </button>
+    <button class="btn btn-secondary ms-1" (click)="back()">
+      Back
+    </button>
+  </div>
+</section>

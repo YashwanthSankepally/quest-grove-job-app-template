@@ -3,8 +3,24 @@
 
 .qg-app-section {
     display: flex;
+    flex-direction: column;
     height: 100vh;
     justify-content: center;
     align-items: center;
-    margin-top: 80px;
+    margin-top: 10px;
+
+
+    .qg-settings-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        // .qg-settings-save-btn {
+        //     max-width: 150px !important;
+        // }
+    
+        .qg-toggle-switch {
+            margin-top: 20px;
+        }
+    }
 }

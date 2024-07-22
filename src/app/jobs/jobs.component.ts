@@ -1,6 +1,7 @@
-import { Component, Injector, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SharedService } from '../shared.service';
+import * as bootstrap from 'bootstrap';
+import { JobsService } from '../jobs.service';
 
 @Component({
   selector: 'app-jobs',
@@ -8,8 +9,7 @@ import { SharedService } from '../shared.service';
   styleUrls: ['./jobs.component.scss'],
 })
 export class JobsComponent implements OnInit {
-  displayJobs: boolean = true;
-  salaryValue:number = 25000;
+  salaryValue: number = 25000;
   selectedCategories: string[] = [];
   showAllJobs: boolean = false;
   searchQuery: string = '';
@@ -39,7 +39,8 @@ export class JobsComponent implements OnInit {
       isApplied: false,
       SalaryInNumbers: 37500,
       displayJobCard: true,
-      category: 'Web Development'
+      category: 'Web Development',
+      favorite: false,
     },
     {
       companyName: 'Virtuo Dynamics',
@@ -57,7 +58,8 @@ export class JobsComponent implements OnInit {
       isApplied: false,
       SalaryInNumbers: 43000,
       displayJobCard: true,
-      category: 'Software Development'
+      category: 'Software Development',
+      favorite: false,
     },
     {
       companyName: 'Celestial Solutions',
@@ -81,7 +83,8 @@ export class JobsComponent implements OnInit {
       isApplied: false,
       SalaryInNumbers: 50000,
       displayJobCard: true,
-      category: 'Data Science'
+      category: 'Data Science',
+      favorite: false,
     },
     {
       companyName: 'Infinibyte Innovations',
@@ -99,7 +102,8 @@ export class JobsComponent implements OnInit {
       isApplied: false,
       SalaryInNumbers: 58000,
       displayJobCard: true,
-      category: 'DevOps'
+      category: 'DevOps',
+      favorite: false,
     },
     {
       companyName: 'Zenith Systems',
@@ -117,7 +121,8 @@ export class JobsComponent implements OnInit {
       isApplied: false,
       SalaryInNumbers: 45800,
       displayJobCard: true,
-      category: 'Mobile Development'
+      category: 'Mobile Development',
+      favorite: false,
     },
     {
       companyName: 'QuantumQuest Corp.',
@@ -140,7 +145,8 @@ export class JobsComponent implements OnInit {
       isApplied: false,
       SalaryInNumbers: 66000,
       displayJobCard: true,
-      category: 'Artificial Intelligence'
+      category: 'Artificial Intelligence',
+      favorite: false,
     },
     {
       companyName: 'StellarWorks Inc.',
@@ -158,7 +164,8 @@ export class JobsComponent implements OnInit {
       isApplied: false,
       SalaryInNumbers: 40000,
       displayJobCard: true,
-      category: 'Web Development'
+      category: 'Web Development',
+      favorite: false,
     },
     {
       companyName: 'NovaCore Enterprises',
@@ -176,7 +183,8 @@ export class JobsComponent implements OnInit {
       isApplied: false,
       SalaryInNumbers: 51000,
       displayJobCard: true,
-      category: 'Backend Development'
+      category: 'Backend Development',
+      favorite: false,
     },
     {
       companyName: 'Eclipse Innovations',
@@ -200,7 +208,8 @@ export class JobsComponent implements OnInit {
       isApplied: false,
       SalaryInNumbers: 41000,
       displayJobCard: true,
-      category: 'Design'
+      category: 'Design',
+      favorite: false,
     },
     {
       companyName: 'Aether Solutions',
@@ -224,32 +233,324 @@ export class JobsComponent implements OnInit {
       isApplied: false,
       SalaryInNumbers: 45800,
       displayJobCard: true,
-      category: 'Networking'
+      category: 'Networking',
+      favorite: false,
+    },
+    {
+      companyName: 'TitanTech Industries',
+      role: 'Cybersecurity Analyst',
+      skills: [
+        'Penetration Testing ',
+        'Vulnerability Assessment ',
+        'SIEM ',
+        'Incident Response ',
+        'Network Security ',
+      ],
+      Salary: '6.5 LPA',
+      Experience: '2-5 Yrs',
+      aboutCompany:
+        'TitanTech Industries is a leader in cybersecurity solutions, providing advanced security measures to protect against digital threats.',
+      aboutJobRole:
+        'As a Cybersecurity Analyst at TitanTech Industries, you will be responsible for identifying and mitigating security risks. You will conduct penetration testing, vulnerability assessments, and manage security incidents.',
+      City: 'Bengaluru',
+      Address:
+        'TitanTech Industries, 123 Cyber Hub, Whitefield, Bengaluru, Karnataka, India',
+      isApplied: false,
+      SalaryInNumbers: 54200,
+      displayJobCard: true,
+      category: 'Cybersecurity',
+      favorite: false,
+    },
+    {
+      companyName: 'Aurora Tech Labs',
+      role: 'Cloud Solutions Architect',
+      skills: [
+        'AWS ',
+        'Azure ',
+        'Google Cloud ',
+        'Cloud Infrastructure ',
+        'DevOps ',
+      ],
+      Salary: '9.0 LPA',
+      Experience: '4-7 Yrs',
+      aboutCompany:
+        'Aurora Tech Labs specializes in cloud computing solutions, offering expertise in cloud architecture and infrastructure.',
+      aboutJobRole:
+        'As a Cloud Solutions Architect at Aurora Tech Labs, you will design and implement cloud-based solutions. You will work with clients to understand their needs and develop scalable cloud architectures.',
+      City: 'Pune',
+      Address:
+        'Aurora Tech Labs, 234 Cloud Park, Baner, Pune, Maharashtra, India',
+      isApplied: false,
+      SalaryInNumbers: 75000,
+      displayJobCard: true,
+      category: 'Cloud Computing',
+      favorite: false,
+    },
+    {
+      companyName: 'Nexus Innovations',
+      role: 'Business Analyst',
+      skills: [
+        'Business Analysis ',
+        'Requirements Gathering ',
+        'Data Analysis ',
+        'Project Management ',
+        'SQL ',
+      ],
+      Salary: '5.8 LPA',
+      Experience: '2-4 Yrs',
+      aboutCompany:
+        'Nexus Innovations is a consulting firm that helps businesses optimize their operations through data-driven insights and strategic planning.',
+      aboutJobRole:
+        'As a Business Analyst at Nexus Innovations, you will analyze business processes, gather requirements, and provide data-driven recommendations. You will work with cross-functional teams to implement solutions that improve efficiency and effectiveness.',
+      City: 'Mumbai',
+      Address:
+        'Nexus Innovations, 789 Business Plaza, Lower Parel, Mumbai, Maharashtra, India',
+      isApplied: false,
+      SalaryInNumbers: 48300,
+      displayJobCard: true,
+      category: 'Business Analysis',
+      favorite: false,
+    },
+    {
+      companyName: 'Omega Systems',
+      role: 'Database Administrator',
+      skills: [
+        'SQL ',
+        'Oracle ',
+        'MySQL ',
+        'Database Management ',
+        'Backup and Recovery ',
+      ],
+      Salary: '7.2 LPA',
+      Experience: '3-5 Yrs',
+      aboutCompany:
+        'Omega Systems provides comprehensive IT solutions, including database management, to ensure data integrity and availability.',
+      aboutJobRole:
+        'As a Database Administrator at Omega Systems, you will manage and maintain database systems. You will ensure data security, perform backups, and optimize database performance.',
+      City: 'Delhi',
+      Address: 'Omega Systems, 123 Data Street, Nehru Place, Delhi, India',
+      isApplied: false,
+      SalaryInNumbers: 60000,
+      displayJobCard: true,
+      category: 'Database Administration',
+      favorite: false,
+    },
+    {
+      companyName: 'Sigma Technologies',
+      role: 'QA Engineer',
+      skills: [
+        'Manual Testing ',
+        'Automation Testing ',
+        'Selenium ',
+        'Test Cases ',
+        'Bug Tracking ',
+      ],
+      Salary: '4.8 LPA',
+      Experience: '1-3 Yrs',
+      aboutCompany:
+        'Sigma Technologies is dedicated to delivering high-quality software solutions, ensuring rigorous testing and quality assurance practices.',
+      aboutJobRole:
+        'As a QA Engineer at Sigma Technologies, you will perform manual and automated testing to ensure software quality. You will write test cases, identify bugs, and work with developers to resolve issues.',
+      City: 'Chennai',
+      Address:
+        'Sigma Technologies, 321 Quality Street, T. Nagar, Chennai, Tamil Nadu, India',
+      isApplied: false,
+      SalaryInNumbers: 40000,
+      displayJobCard: true,
+      category: 'Quality Assurance',
+      favorite: false,
+    },
+    {
+      companyName: 'Nebula Networks',
+      role: 'System Administrator',
+      skills: [
+        'Linux ',
+        'Windows Server ',
+        'Network Management ',
+        'Virtualization ',
+        'Scripting ',
+      ],
+      Salary: '6.0 LPA',
+      Experience: '2-5 Yrs',
+      aboutCompany:
+        'Nebula Networks specializes in IT infrastructure management, providing reliable and secure system administration services.',
+      aboutJobRole:
+        'As a System Administrator at Nebula Networks, you will manage and maintain IT systems and networks. You will ensure system availability, security, and performance, and handle troubleshooting and support tasks.',
+      City: 'Hyderabad',
+      Address:
+        'Nebula Networks, 789 IT Park, Gachibowli, Hyderabad, Telangana, India',
+      isApplied: false,
+      SalaryInNumbers: 50000,
+      displayJobCard: true,
+      category: 'System Administration',
+      favorite: false,
+    },
+    {
+      companyName: 'Helios Innovations',
+      role: 'Product Manager',
+      skills: [
+        'Product Management ',
+        'Agile ',
+        'Market Research ',
+        'Roadmap Planning ',
+        'Stakeholder Management ',
+      ],
+      Salary: '8.5 LPA',
+      Experience: '3-6 Yrs',
+      aboutCompany:
+        'Helios Innovations drives innovation through strategic product development and management, delivering products that meet market needs.',
+      aboutJobRole:
+        'As a Product Manager at Helios Innovations, you will define product vision, conduct market research, and manage the product lifecycle. You will collaborate with cross-functional teams to deliver products that align with business goals.',
+      City: 'Pune',
+      Address:
+        'Helios Innovations, 234 Product Avenue, Kalyani Nagar, Pune, Maharashtra, India',
+      isApplied: false,
+      SalaryInNumbers: 70800,
+      displayJobCard: true,
+      category: 'Product Management',
+      favorite: false,
+    },
+    {
+      companyName: 'Galaxy Solutions',
+      role: 'IT Support Specialist',
+      skills: [
+        'Technical Support ',
+        'Troubleshooting ',
+        'Customer Service ',
+        'Windows ',
+        'MacOS ',
+      ],
+      Salary: '4.0 LPA',
+      Experience: '0-2 Yrs',
+      aboutCompany:
+        'Galaxy Solutions provides comprehensive IT support services to ensure seamless technology operations for businesses.',
+      aboutJobRole:
+        'As an IT Support Specialist at Galaxy Solutions, you will provide technical support and troubleshoot issues for clients. You will assist with hardware and software problems and ensure customer satisfaction.',
+      City: 'Kolkata',
+      Address:
+        'Galaxy Solutions, 890 Support Lane, Park Street, Kolkata, West Bengal, India',
+      isApplied: false,
+      SalaryInNumbers: 33300,
+      displayJobCard: true,
+      category: 'IT Support',
+      favorite: false,
+    },
+    {
+      companyName: 'Pinnacle AI',
+      role: 'Machine Learning Engineer',
+      skills: [
+        'Python ',
+        'Machine Learning ',
+        'TensorFlow ',
+        'Data Analysis ',
+        'Algorithms ',
+      ],
+      Salary: '7.5 LPA',
+      Experience: '3-5 Yrs',
+      aboutCompany:
+        'Pinnacle AI specializes in developing advanced machine learning algorithms to drive business intelligence and automation.',
+      aboutJobRole:
+        'As a Machine Learning Engineer at Pinnacle AI, you will develop and deploy machine learning models. You will work on data analysis, feature engineering, and model optimization to deliver AI-driven solutions.',
+      City: 'Bengaluru',
+      Address:
+        'Pinnacle AI, 123 ML Hub, Koramangala, Bengaluru, Karnataka, India',
+      isApplied: false,
+      SalaryInNumbers: 62500,
+      displayJobCard: true,
+      category: 'Machine Learning',
+      favorite: false,
+    },
+    {
+      companyName: 'Solstice Digital',
+      role: 'Digital Marketing Specialist',
+      skills: [
+        'SEO ',
+        'SEM ',
+        'Content Marketing ',
+        'Social Media ',
+        'Analytics ',
+      ],
+      Salary: '5.0 LPA',
+      Experience: '1-3 Yrs',
+      aboutCompany:
+        'Solstice Digital is a digital marketing agency that helps businesses enhance their online presence and reach their target audience.',
+      aboutJobRole:
+        'As a Digital Marketing Specialist at Solstice Digital, you will create and implement digital marketing strategies. You will manage SEO, SEM, and social media campaigns, and analyze performance metrics to optimize marketing efforts.',
+      City: 'Delhi',
+      Address: 'Solstice Digital, 567 Marketing Lane, Hauz Khas, Delhi, India',
+      isApplied: false,
+      SalaryInNumbers: 41600,
+      displayJobCard: true,
+      category: 'Digital Marketing',
+      favorite: false,
     },
   ];
 
+  jobCategories = [
+    'Web Development',
+    'Software Development',
+    'Data Science',
+    'DevOps',
+    ' Mobile Development',
+    'Artificial Intelligence',
+    'Backend Development',
+    'Design',
+    'Networking',
+    'Cybersecurity',
+    'Cloud Computing',
+    'Business Analysis',
+    'Database Administration',
+    'Quality Assurance',
+    'System Administration',
+    'Product Management',
+    'IT Support',
+    'Machine Learning',
+    'Digital Marketing',
+  ];
+
   filteredJobsArray = [...this.jobsArray];
-  
 
-  constructor(private router: Router, private injector: Injector, private sharedService: SharedService) {}
-
-  ngOnInit(): void {
-    this.sharedService.displayJobs$.subscribe(value => {
-      this.displayJobs = value;
-    });
+  constructor(private router: Router, private jobsService: JobsService) {
+    this.filteredJobsArray = this.jobsService.jobsArray;
   }
 
-  toggleDisplayJobs() {
-    const currentValue = this.sharedService.getDisplayJobs();
-    this.sharedService.setDisplayJobs(!currentValue);
-  }
+  ngOnInit(): void {}
 
   more(job: any) {
-    this.router.navigate(['/job-detail'], { state: { data: job } });
+    this.router.navigate(['/job-detail'], {
+      queryParams: {
+        companyName: job.companyName,
+        role: job.role,
+        skills: JSON.stringify(job.skills),
+        Salary: job.Salary,
+        Experience: job.Experience,
+        aboutCompany: job.aboutCompany,
+        aboutJobRole: job.aboutJobRole,
+        City: job.City,
+        Address: job.Address,
+        isApplied: job.isApplied,
+        SalaryInNumbers: job.SalaryInNumbers,
+        displayJobCard: job.displayJobCard,
+        category: job.category,
+        favorite: job.favorite,
+      },
+    });
   }
 
   apply(job: any) {
     job.isApplied = true;
+    this.showToast();
+  }
+
+  showToast(): void {
+    const toastElement = document.getElementById('liveToast');
+    if (toastElement) {
+      const toast = new bootstrap.Toast(toastElement, { delay: 10000 });
+      toast.show();
+
+      const audio = new Audio('../../assets/music/notification_ding.mp3');
+      audio.play();
+    }
   }
 
   onSalaryChange(event: any) {
@@ -278,7 +579,7 @@ export class JobsComponent implements OnInit {
 
   filterJobs() {
     if (this.showAllJobs) {
-      this.jobsArray.forEach(job => job.displayJobCard = true);
+      this.jobsArray.forEach((job) => (job.displayJobCard = true));
     } else {
       this.jobsArray.forEach((job) => {
         const salaryPass = job.SalaryInNumbers <= this.salaryValue;
@@ -302,12 +603,15 @@ export class JobsComponent implements OnInit {
       const namesMatch = job.companyName.toLowerCase().includes(searchQuery);
       const cityMatch = job.City.toLowerCase().includes(searchQuery);
 
-      return roleMatch || skillsMatch || cityMatch || namesMatch ;
+      return roleMatch || skillsMatch || cityMatch || namesMatch;
     });
 
     if (searchQuery === '') {
       this.filteredJobsArray = this.jobsArray;
     }
   }
-  
+
+  toggleFavorite(job: any): void {
+    job.favorite = !job.favorite;
+  }
 }

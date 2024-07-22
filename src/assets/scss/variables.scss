@@ -12,3 +12,6 @@ $border-color: #d5d4e6;
 $muted-color: #6c757d;
 $black-color: #000000;
 $i: unquote("!important");
+$primary-color-light: lighten($primary-color, 20%);
+$background-color: #f8f9fa;
+$text-color: #343a40;

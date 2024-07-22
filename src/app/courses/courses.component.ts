@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-courses',
@@ -61,7 +62,27 @@ export class CoursesComponent implements OnInit {
         'https://youtube.com/playlist?list=PLzdWZT-ZJD08nIY0WPevCXLZWR310EMWX&si=7E6htNvsQmOL4mhn',
       favorite: false,
     },
+    {
+      courseTitle: 'Python for Beginners',
+      thumbnail:
+        'https://i.ytimg.com/vi/H1oR6ld4DKo/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDfEluK3q4fSWXoYYKUO2LWbmv0aw',
+      info: 'Python for Beginners: Learn Python, a versatile and beginner-friendly programming language. This course covers the basics of Python and helps you get started with coding.',
+      playlistUrl:
+        'https://youtube.com/playlist?list=PLzdWZT-ZJD09EGEiU3YgVBxadMDaTKqUx&si=eH1sMOeE8IKpT8D8',
+      favorite: false,
+    },
+    {
+      courseTitle: 'Bootstrap Tutorials',
+      thumbnail:
+        'https://i.ytimg.com/vi/KIalSwvqLlg/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLDKtfmbKjCMcPLYOTCKqgMRRCiB6g',
+      info: 'Bootstrap Tutorials: Master Bootstrap, the popular front-end framework for building responsive web pages. This course teaches you how to use Bootstrap to create modern and visually appealing websites.',
+      playlistUrl:
+        'https://youtube.com/playlist?list=PLzdWZT-ZJD0_nZewQICMCr0w3qYQla2Xk&si=IRRsHPkSTten_QD6',
+      favorite: false,
+    },
   ];
+
+  filteredCourses = [...this.coursesArray];
 
   constructor() {}
 
@@ -69,5 +90,81 @@ export class CoursesComponent implements OnInit {
 
   toggleFavorite(course: any): void {
     course.favorite = !course.favorite;
+  }
+
+  searchCourses(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const searchQuery = inputElement.value.toLowerCase();
+
+    this.filteredCourses = this.coursesArray.filter((course) => {
+      const courseName = course.courseTitle.toLowerCase().includes(searchQuery);
+
+      return courseName;
+    });
+
+    if (searchQuery === '') {
+      this.filteredCourses = this.coursesArray;
+    }
+  }
+
+  copy(url: string): void {
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        // alert('Link copied to clipboard');
+        this.showToast();
+      })
+      .catch((err) => {
+        console.error('Could not copy text: ', err);
+      });
+  }
+
+  showToast(): void {
+    const toastElement = document.getElementById('liveToast');
+    if (toastElement) {
+      const toast = new bootstrap.Toast(toastElement, { delay: 10000 });
+      toast.show();
+
+      const audio = new Audio('../../assets/music/notification_ding.mp3');
+      audio.play();
+    }
+  }
+
+  shareToWhatsapp(url: string): void {
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(url)}`;
+    window.open(whatsappUrl, '_blank');
+  }
+
+  shareToFacebook(url: string): void {
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+      url
+    )}`;
+    window.open(facebookUrl, '_blank');
+  }
+
+  shareToTwitter(url: string): void {
+    const twitterUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      url
+    )}`;
+    window.open(twitterUrl, '_blank');
+  }
+
+  shareToTelegram(url: string): void {
+    const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(url)}`;
+    window.open(telegramUrl, '_blank');
+  }
+
+  shareToMail(url: string): void {
+    const mailtoUrl = `mailto:?subject=Check out this course&body=${encodeURIComponent(
+      url
+    )}`;
+    window.location.href = mailtoUrl;
+  }
+
+  shareToLinkedIn(url: string): void {
+    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+      url
+    )}`;
+    window.open(linkedinUrl, '_blank');
   }
 }

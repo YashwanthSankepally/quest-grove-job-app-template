@@ -3,8 +3,31 @@
 
 .qg-app-section {
     display: flex;
-    height: 100vh;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin-top: 80px;
+    margin-top: 10px;
+
+    .accordion {
+        width: 100%;
+        max-width: 800px;
+
+        .accordion-item {
+            .accordion-header {
+                .accordion-button {
+                    background-color: $primary-color;
+                    color: $black-color;
+
+                    &:not(.collapsed) {
+                        color: $black-color;
+                        background-color: $primary-color-light;
+                    }
+                }
+            }
+
+            .accordion-body {
+                background-color: $background-color;
+                color: $text-color;
+            }
+        }
+    }
 }
